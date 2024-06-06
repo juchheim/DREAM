@@ -1,0 +1,30 @@
+# Ignore wp-config.php
+wp-config.php
+
+# Ignore the entire wp-content/uploads/ directory
+#   wp-content/uploads/
+
+# Ignore the entire wp-content/cache/ directory
+wp-content/cache/
+
+# Ignore the entire wp-content/upgrade/ directory
+wp-content/upgrade/
+
+# Ignore node_modules/ directory (if using Node.js)
+node_modules/
+
+# Ignore vendor/ directory (if using Composer)
+vendor/
+
+# Ignore log files
+*.log
+
+# Ignore environment configuration files
+*.env
+
+# Ignore compiled stylesheets
+*.sass-cache
+*.scss-cache
+
+# Ignore Mac system files
+.DS_Store

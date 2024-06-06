@@ -1,0 +1,1899 @@
+/*!
+Theme Name: DREAM
+Theme URI: http://underscores.me/
+Author: Underscores.me
+Author URI: http://underscores.me/
+Description: Description
+Version: 1.0.0
+Tested up to: 5.4
+Requires PHP: 5.6
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: dream
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned.
+
+DREAM is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
+*/
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Generic
+	- Normalize
+	- Box sizing
+# Base
+	- Typography
+	- Elements
+	- Links
+	- Forms
+## Layouts
+# Components
+	- Navigation
+	- Posts and pages
+	- Comments
+	- Widgets
+	- Media
+	- Captions
+	- Galleries
+# plugins
+	- Jetpack infinite scroll
+# Utilities
+	- Accessibility
+	- Alignments
+
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Generic
+--------------------------------------------------------------*/
+
+/* Normalize
+--------------------------------------------- */
+
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+	 ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+html {
+	line-height: 1.15;
+	-webkit-text-size-adjust: 100%;
+}
+
+/* Sections
+	 ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+body {
+	margin: 0;
+}
+
+.roboto-thin {
+	font-family: "Roboto", sans-serif;
+	font-weight: 100;
+	font-style: normal;
+  }
+  
+  .roboto-light {
+	font-family: "Roboto", sans-serif;
+	font-weight: 300;
+	font-style: normal;
+  }
+  
+  .roboto-regular {
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+  }
+  
+  .roboto-medium {
+	font-family: "Roboto", sans-serif;
+	font-weight: 500;
+	font-style: normal;
+  }
+  
+  .roboto-bold {
+	font-family: "Roboto", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+  }
+  
+  .roboto-black {
+	font-family: "Roboto", sans-serif;
+	font-weight: 900;
+	font-style: normal;
+  }
+  
+  .roboto-thin-italic {
+	font-family: "Roboto", sans-serif;
+	font-weight: 100;
+	font-style: italic;
+  }
+  
+  .roboto-light-italic {
+	font-family: "Roboto", sans-serif;
+	font-weight: 300;
+	font-style: italic;
+  }
+  
+  .roboto-regular-italic {
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	font-style: italic;
+  }
+  
+  .roboto-medium-italic {
+	font-family: "Roboto", sans-serif;
+	font-weight: 500;
+	font-style: italic;
+  }
+  
+  .roboto-bold-italic {
+	font-family: "Roboto", sans-serif;
+	font-weight: 700;
+	font-style: italic;
+  }
+  
+  .roboto-black-italic {
+	font-family: "Roboto", sans-serif;
+	font-weight: 900;
+	font-style: italic;
+  }
+  
+  .titillium-web-extralight {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 200;
+	font-style: normal;
+  }
+  
+  .titillium-web-light {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 300;
+	font-style: normal;
+  }
+  
+  .titillium-web-regular {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+  }
+  
+  .titillium-web-semibold {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 600;
+	font-style: normal;
+  }
+  
+  .titillium-web-bold {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+  }
+  
+  .titillium-web-black {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 900;
+	font-style: normal;
+  }
+  
+  .titillium-web-extralight-italic {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 200;
+	font-style: italic;
+  }
+  
+  .titillium-web-light-italic {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 300;
+	font-style: italic;
+  }
+  
+  .titillium-web-regular-italic {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 400;
+	font-style: italic;
+  }
+  
+  .titillium-web-semibold-italic {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 600;
+	font-style: italic;
+  }
+  
+  .titillium-web-bold-italic {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 700;
+	font-style: italic;
+  }
+  
+
+
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+main {
+	display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+h1 {
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+
+/* Grouping content
+	 ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+hr {
+	box-sizing: content-box;
+	height: 0;
+	overflow: visible;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+pre {
+	font-family: monospace, monospace;
+	font-size: 1em;
+}
+
+/* Text-level semantics
+	 ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+a {
+	background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+abbr[title] {
+	border-bottom: none;
+	text-decoration: underline;
+	text-decoration: underline dotted;
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+b,
+strong {
+	font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+code,
+kbd,
+samp {
+	font-family: monospace, monospace;
+	font-size: 1em;
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+small {
+	font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+sup {
+	top: -0.5em;
+}
+
+/* Embedded content
+	 ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+img {
+	border-style: none;
+}
+
+/* Forms
+	 ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+	font-family: inherit;
+	font-size: 100%;
+	line-height: 1.15;
+	margin: 0;
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+button,
+input {
+	overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+button,
+select {
+	text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+	-webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+	border-style: none;
+	padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+	outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+fieldset {
+	padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *		`fieldset` elements in all browsers.
+ */
+legend {
+	box-sizing: border-box;
+	color: inherit;
+	display: table;
+	max-width: 100%;
+	padding: 0;
+	white-space: normal;
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+progress {
+	vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+textarea {
+	overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+[type="checkbox"],
+[type="radio"] {
+	box-sizing: border-box;
+	padding: 0;
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+	height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+[type="search"] {
+	-webkit-appearance: textfield;
+	outline-offset: -2px;
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+::-webkit-file-upload-button {
+	-webkit-appearance: button;
+	font: inherit;
+}
+
+/* Interactive
+	 ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+details {
+	display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+summary {
+	display: list-item;
+}
+
+/* Misc
+	 ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+template {
+	display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+[hidden] {
+	display: none;
+}
+
+/* Box sizing
+--------------------------------------------- */
+
+/* Inherit box-sizing to more easily change it's value on a component level.
+@link http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+/*--------------------------------------------------------------
+# Base
+--------------------------------------------------------------*/
+
+/* Typography
+--------------------------------------------- */
+body,
+button,
+input,
+select,
+optgroup,
+textarea {
+	color: #404040;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	clear: both;
+}
+
+p {
+	margin-bottom: 1.5em;
+}
+
+dfn,
+cite,
+em,
+i {
+	font-style: italic;
+}
+
+blockquote {
+	margin: 0 1.5em;
+}
+
+address {
+	margin: 0 0 1.5em;
+}
+
+pre {
+	background: #eee;
+	font-family: "Courier 10 Pitch", courier, monospace;
+	line-height: 1.6;
+	margin-bottom: 1.6em;
+	max-width: 100%;
+	overflow: auto;
+	padding: 1.6em;
+}
+
+code,
+kbd,
+tt,
+var {
+	font-family: monaco, consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+}
+
+abbr,
+acronym {
+	border-bottom: 1px dotted #666;
+	cursor: help;
+}
+
+mark,
+ins {
+	background: #fff9c0;
+	text-decoration: none;
+}
+
+big {
+	font-size: 125%;
+}
+
+/* Elements
+--------------------------------------------- */
+body {
+	background: #fff;
+}
+
+hr {
+	background-color: #ccc;
+	border: 0;
+	height: 1px;
+	margin-bottom: 1.5em;
+}
+
+ul,
+ol {
+	margin: 0 0 1.5em 3em;
+}
+
+ul {
+	list-style: disc;
+}
+
+ol {
+	list-style: decimal;
+}
+
+li > ul,
+li > ol {
+	margin-bottom: 0;
+	margin-left: 1.5em;
+}
+
+dt {
+	font-weight: 700;
+}
+
+dd {
+	margin: 0 1.5em 1.5em;
+}
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+}
+
+figure {
+	margin: 1em 0;
+}
+
+table {
+	margin: 0 0 1.5em;
+	width: 100%;
+}
+
+/* Links
+--------------------------------------------- */
+a {
+	color: #4169e1;
+}
+
+a:visited {
+	color: #800080;
+}
+
+a:hover,
+a:focus,
+a:active {
+	color: #191970;
+}
+
+a:focus {
+	outline: thin dotted;
+}
+
+a:hover,
+a:active {
+	outline: 0;
+}
+
+/* Forms
+--------------------------------------------- */
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	border: 1px solid;
+	border-color: #ccc #ccc #bbb;
+	border-radius: 3px;
+	background: #e6e6e6;
+	color: rgba(0, 0, 0, 0.8);
+	line-height: 1;
+	padding: 0.6em 1em 0.4em;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+	border-color: #ccc #bbb #aaa;
+}
+
+button:active,
+button:focus,
+input[type="button"]:active,
+input[type="button"]:focus,
+input[type="reset"]:active,
+input[type="reset"]:focus,
+input[type="submit"]:active,
+input[type="submit"]:focus {
+	border-color: #aaa #bbb #bbb;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+textarea {
+	color: #666;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 3px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="range"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="week"]:focus,
+input[type="time"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="color"]:focus,
+textarea:focus {
+	color: #111;
+}
+
+select {
+	border: 1px solid #ccc;
+}
+
+textarea {
+	width: 100%;
+}
+
+/*--------------------------------------------------------------
+# Layouts
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Components
+--------------------------------------------------------------*/
+
+/* Navigation
+--------------------------------------------- */
+.main-navigation {
+	display: block;
+	width: 100%;
+}
+
+.main-navigation ul {
+	display: none;
+	list-style: none;
+	margin: 0;
+	padding-left: 0;
+}
+
+.main-navigation ul ul {
+	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+	float: left;
+	position: absolute;
+	top: 100%;
+	left: -999em;
+	z-index: 99999;
+}
+
+.main-navigation ul ul ul {
+	left: -999em;
+	top: 0;
+}
+
+.main-navigation ul ul li:hover > ul,
+.main-navigation ul ul li.focus > ul {
+	display: block;
+	left: auto;
+}
+
+.main-navigation ul ul a {
+	width: 200px;
+}
+
+.main-navigation ul li:hover > ul,
+.main-navigation ul li.focus > ul {
+	left: auto;
+}
+
+.main-navigation li {
+	position: relative;
+}
+
+.main-navigation a {
+	display: block;
+	text-decoration: none;
+}
+
+/* Small menu. */
+.menu-toggle,
+.main-navigation.toggled ul {
+	display: block;
+}
+
+@media screen and (min-width: 37.5em) {
+
+	.menu-toggle {
+		display: none;
+	}
+
+	.main-navigation ul {
+		display: flex;
+	}
+}
+
+.site-main .comment-navigation,
+.site-main
+.posts-navigation,
+.site-main
+.post-navigation {
+	margin: 0 0 1.5em;
+}
+
+.comment-navigation .nav-links,
+.posts-navigation .nav-links,
+.post-navigation .nav-links {
+	display: flex;
+}
+
+.comment-navigation .nav-previous,
+.posts-navigation .nav-previous,
+.post-navigation .nav-previous {
+	flex: 1 0 50%;
+}
+
+.comment-navigation .nav-next,
+.posts-navigation .nav-next,
+.post-navigation .nav-next {
+	text-align: end;
+	flex: 1 0 50%;
+}
+
+/* Posts and pages
+--------------------------------------------- */
+.sticky {
+	display: block;
+}
+
+.post,
+.page {
+	margin: 0 0 1.5em;
+}
+
+.updated:not(.published) {
+	display: none;
+}
+
+.page-content,
+.entry-content,
+.entry-summary {
+	margin: 1.5em 0 0;
+}
+
+.page-links {
+	clear: both;
+	margin: 0 0 1.5em;
+}
+
+/* Comments
+--------------------------------------------- */
+.comment-content a {
+	word-wrap: break-word;
+}
+
+.bypostauthor {
+	display: block;
+}
+
+/* Widgets
+--------------------------------------------- */
+.widget {
+	margin: 0 0 1.5em;
+}
+
+.widget select {
+	max-width: 100%;
+}
+
+/* Media
+--------------------------------------------- */
+.page-content .wp-smiley,
+.entry-content .wp-smiley,
+.comment-content .wp-smiley {
+	border: none;
+	margin-bottom: 0;
+	margin-top: 0;
+	padding: 0;
+}
+
+/* Make sure logo link wraps around logo image. */
+.custom-logo-link {
+	display: inline-block;
+}
+
+/* Captions
+--------------------------------------------- */
+.wp-caption {
+	margin-bottom: 1.5em;
+	max-width: 100%;
+}
+
+.wp-caption img[class*="wp-image-"] {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.wp-caption .wp-caption-text {
+	margin: 0.8075em 0;
+}
+
+.wp-caption-text {
+	text-align: center;
+}
+
+/* Galleries
+--------------------------------------------- */
+.gallery {
+	margin-bottom: 1.5em;
+	display: grid;
+	grid-gap: 1.5em;
+}
+
+.gallery-item {
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+}
+
+.gallery-columns-2 {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.gallery-columns-3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.gallery-columns-4 {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.gallery-columns-5 {
+	grid-template-columns: repeat(5, 1fr);
+}
+
+.gallery-columns-6 {
+	grid-template-columns: repeat(6, 1fr);
+}
+
+.gallery-columns-7 {
+	grid-template-columns: repeat(7, 1fr);
+}
+
+.gallery-columns-8 {
+	grid-template-columns: repeat(8, 1fr);
+}
+
+.gallery-columns-9 {
+	grid-template-columns: repeat(9, 1fr);
+}
+
+.gallery-caption {
+	display: block;
+}
+
+/*--------------------------------------------------------------
+# Plugins
+--------------------------------------------------------------*/
+
+/* Jetpack infinite scroll
+--------------------------------------------- */
+
+/* Hide the Posts Navigation and the Footer when Infinite Scroll is in use. */
+.infinite-scroll .posts-navigation,
+.infinite-scroll.neverending .site-footer {
+	display: none;
+}
+
+/* Re-display the Theme Footer when Infinite Scroll has reached its end. */
+.infinity-end.neverending .site-footer {
+	display: block;
+}
+
+/*--------------------------------------------------------------
+# Utilities
+--------------------------------------------------------------*/
+
+/* Accessibility
+--------------------------------------------- */
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	clip-path: none;
+	color: #21759b;
+	display: block;
+	font-size: 0.875rem;
+	font-weight: 700;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000;
+}
+
+/* Do not show the outline on the skip link target. */
+#primary[tabindex="-1"]:focus {
+	outline: 0;
+}
+
+/* Alignments
+--------------------------------------------- */
+.alignleft {
+
+	/*rtl:ignore*/
+	float: left;
+
+	/*rtl:ignore*/
+	margin-right: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+.alignright {
+
+	/*rtl:ignore*/
+	float: right;
+
+	/*rtl:ignore*/
+	margin-left: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+.aligncenter {
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1.5em;
+}
+
+
+
+
+
+/* my code starts here */
+
+/* Caret styles */
+.caret {
+	display: inline-block;
+	margin-left: 10px;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid #000;
+	transition: transform 0.3s ease;
+}
+.caret-rotate {
+	transform: rotate(90deg);
+}
+
+/* Basic reset */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+/* Initial header styles */
+.site-header {
+    background-color: #fff;
+    color: #000;
+    padding: 20px 0;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+/* Shrinked header styles */
+.site-header.shrink {
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff; /* Add background to prevent content behind the header from being visible */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.site-header .site-branding img {
+    transition: max-height 0.3s ease;
+}
+
+.site-header.shrink .site-branding img {
+    max-height: 100px;
+}
+
+/* Shrink main menu ul top position */
+.main-menu ul {
+    transition: top 0.3s ease;
+}
+
+.site-header.shrink .main-menu ul {
+    top: 80px;
+}
+
+/* Add space above the media-slider when header shrinks */
+.media-slider {
+    transition: margin-top 0.3s ease;
+}
+
+.media-slider.spaced {
+    margin-top: 77px;
+}
+
+
+
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.site-header .site-branding {
+    flex: 1;
+    padding-left: 50px;
+}
+
+.site-header .site-branding img {
+    max-height: 150px;
+    width: auto;
+    display: block;
+	padding:10px 0 0 70px;
+}
+
+.site-header .site-navigation {
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 50px;
+}
+
+.main-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-menu li {
+    position: relative;
+    min-height: 28px;
+}
+
+.main-menu li a {
+    color: #000;
+    padding: 10px 20px;
+    padding-bottom: 12px;
+    text-decoration: none;
+    position: relative;
+}
+
+.main-menu li a:hover {
+    background-color: #ffd700;
+}
+
+.main-menu ul {
+    display: none;
+    position: fixed;
+    top: 127px; /* Adjust as needed to position below the header */
+    left: 0;
+    width: 100vw; /* Ensure the submenu spans the full viewport width */
+    background-color: lightyellow;
+    list-style: none;
+    padding: 20px;
+    margin: 0;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    flex-direction: row-reverse; /* Reverse the order of items */
+}
+
+.main-menu ul.shrink {
+	top:0px;
+}
+
+.main-menu ul {
+	padding-right:74px;
+}
+
+.main-menu ul li {
+    width: auto;
+    float: right; /* Float the items to the right */
+	z-index: 1100;
+}
+
+
+.main-menu ul li a {
+    padding: 10px;
+    color: #000;
+    font-style: italic;
+}
+
+.main-menu ul li a:hover {
+    background-color: #ffd700;
+}
+
+.main-menu li:hover > ul,
+.main-menu li:focus-within > ul {
+    display: block;
+}
+
+/* Ensure no parent container is restricting the width */
+body, html {
+    overflow-x: visible;
+}
+
+.site-navigation {
+    margin-top: 20px;
+}
+
+/* Mobile menu styles */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    margin-right: 50px;
+}
+
+.hamburger span {
+    height: 3px;
+    background: #000;
+    margin: 4px 0;
+    width: 25px;
+}
+
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    overflow-y: auto;
+    padding-top: 20px;
+    list-style: none;
+}
+
+.close-mobile-menu {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 36px;
+    cursor: pointer;
+    color: #000;
+    z-index: 1001;
+}
+
+.mobile-menu li {
+    border-bottom: 1px solid #ccc;
+    list-style: none;
+}
+
+.mobile-menu li a:hover {
+    background-color: #febd00;
+    color: white;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-menu ul ul {
+    padding-left: 20px;
+}
+
+#menu-main-menu li ul {
+    display: none;
+}
+
+#menu-main-menu li:hover > ul {
+    display: block;
+}
+
+.wp-block-group {
+    display: none;
+}
+
+@media (max-width: 1092px) {
+    .site-navigation {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .mobile-menu {
+        display: none;
+    }
+
+    .mobile-menu.show {
+        display: flex;
+    }
+
+    #menu-main-menu {
+        display: none;
+    }
+
+    .site-branding img {
+        max-height: none;
+        height: auto;
+        width: 100%;
+    }
+
+    .site-branding img {
+        max-height: 80px !important;
+        width: auto !important;
+    }
+
+    .site-branding {
+        flex: 1 0 auto !important;
+    }
+}
+
+/* Hide entire widgets */
+.widget_search, .widget_recent_entries, .widget_recent_comments, .widget_archive, .widget_categories {
+    display: none;
+}
+
+/* Full width slider styles */
+.video-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.video-slider .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.video-slider .slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+.video-slider .slide video {
+    width: 100vw;
+    height: 600px;
+    object-fit: cover;
+}
+
+/* Two-column layout */
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 500px;
+    gap: 20px;
+    padding: 20px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0px;
+    padding-right: 100px;
+}
+
+.right-column {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+    min-height: 1000px;
+}
+
+.entry-content h3 {
+    color: #febd00;
+    font-family: "Titillium Web", sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 22px;
+}
+
+.entry-content strong {
+    color: #0058b2;
+}
+
+
+
+.tall-box {
+    width: 100%;
+    height: 500px;
+    margin-right: 0;
+}
+
+.tall-box {
+    position: absolute;
+    top: -100px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+.tall-box img {
+    object-fit: none;
+    object-position: top left;
+    max-width: 100%;
+    max-height: 100%;
+    align-self: flex-start;
+}
+
+.entry-header h1 {
+    font-family: "Titillium Web", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+    font-size: 42px;
+    color: #0058b2;
+	background-image: url('/wp-content/uploads/2024/06/feathers3.png');
+	background-repeat: no-repeat;
+	padding-left:47px;
+}
+
+.entry-title {
+    font-size: 38px;
+}
+
+.custom-footer {
+    background-color: #febd00;
+    color: white;
+    padding: 120px 0;
+    text-align: center;
+}
+
+.custom-footer a {
+    color: white;
+}
+
+.custom-footer .site-info {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.custom-footer .site-info a {
+    color: white;
+}
+
+.custom-footer p {
+    margin: 0;
+    font-size: 16px;
+}
+
+footer {
+    margin-top: -24px;
+    margin-bottom: -24px;
+}
+
+/* Parallax Effect CSS */
+.single-column-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.parallax-section {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.parallax-background {
+    background-image: url('/wp-content/uploads/2024/06/office.jpg');
+    height: 100%;
+    width: 100%;
+    background-attachment: fixed;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.parallax-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+}
+
+/* Sliding Animation CSS */
+.slide-in {
+    opacity: 0;
+    transform: translateY(100%);
+    transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+.slide-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.wp-block-image img {
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.wp-block-image .alignleft img {
+    margin-right: 24px;
+}
+
+p {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* updated slider */
+.media-slider {
+    position: relative;
+    width: 100%;
+    height: 600px; /* Set height of the slider */
+    overflow: hidden;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%; /* Ensure slides take the full height of the slider */
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%; /* Ensure each slide takes the full height of the slider */
+    box-sizing: border-box;
+}
+
+.slide img,
+.slide video {
+    width: 100%;
+    height: 100%; /* Ensure media takes the full height of the slide */
+    object-fit: cover; /* Ensure media covers the slide area */
+    display: block;
+}
+
+.media-slider .prev,
+.media-slider .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 500;
+}
+
+.media-slider .prev {
+    left: 10px;
+}
+
+.media-slider .next {
+    right: 10px;
+}
+
+.media-slider .prev:hover,
+.media-slider .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.child-page-right-column {
+	padding:0;
+	margin:-30px 0 -26px 0;
+}
+
+.entry-content h2 {
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+}
+
+.content-wrapper article {
+	padding-left: 100px;
+}
+
+/* For child pages: Add margin-top to the primary div when the header shrinks */
+.content-area.header-fixed {
+    margin-top: 195px; 
+}
+
+/* For home: Add margin-top to the primary div when the header shrinks */
+.media-slider.header-fixed {
+    margin-top: 110px;
+}
+
+@media (max-width: 1000px) {
+    .content-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .left-column {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        margin-left: 0;
+        padding-right: 0;
+    }
+
+    .right-column {
+        display: none;
+    }
+
+	.parallax-section {
+		display: none;
+	}
+
+	.left-column article {
+		padding-left: 0px;
+	}
+
+	.content-wrapper article {
+		padding-left: 0px;
+	}
+
+	.child-page-right-column {
+		padding:0;
+		margin: 0 0 0 0;
+	}
+
+	.child-page-right-column {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.child-page-right-column img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+}
+
+
+
+
+.mobile-menu {
+    display: none; /* Hide the mobile menu by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333; /* Background color for the mobile menu */
+    color: white;
+    z-index: 999;
+    overflow-y: auto;
+    padding-top: 60px; /* Space for the close button */
+}
+
+.mobile-menu.show {
+    display: block; /* Show the mobile menu when the 'show' class is added */
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-color: #333; /* Same as the menu background */
+}
+
+.close-mobile-menu {
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Full width */
+}
+
+.mobile-menu ul li {
+    padding: 10px;
+    border-bottom: 1px solid #444; /* Divider between items */
+}
+
+.mobile-menu ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    display: block; /* Full width clickable */
+}
+
+.mobile-menu ul li ul.sub-menu {
+    padding-left: 10px; /* Indent for sub-navigation */
+}
+
+.hamburger {
+    cursor: pointer;
+    font-size: 36px; /* Bigger size for the hamburger */
+    padding: 10px;
+}
+
+.mobile-menu-items {
+	background-color: #0058b2;
+}
+
+.post-thumbnail { display: none; }
+
+.sub-menu li {
+	display: flex;
+    flex-direction: column-reverse;
+}
+
+/* For single column layouts (when a single-column page is detected, this code will be used */
+
+.single-column-layout .content-wrapper {
+    grid-template-columns: 1fr !important;
+}
+
+.single-column-layout .left-column {
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.single-column-layout .right-column {
+    display: none !important;
+}
+
+.single-column-layout article {
+	padding-right: 80px !important;
+}
+
+.site-info img {
+	width:300px;
+}
+
+.contact-info {
+    margin-bottom: 20px;
+}
+
+
+
+/* footer */
+.custom-footer {
+    background-color: #febd00; /* Light background color for contrast */
+    padding: 20px 0;
+}
+
+.custom-footer {
+    background-color: #febd00; /* Dark background color for footer */
+    color: #ffffff; /* White text color for contrast */
+    padding: 40px 0;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 300px; /* Ensure columns don't get too narrow */
+    margin-bottom: 20px;
+    text-align: center; /* Center-align text in each column */
+}
+
+.site-info img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px; /* Center the image and add bottom margin */
+}
+
+.contact-info, .site-info p {
+    margin: 10px 0;
+}
+
+.social-media-icons {
+    margin-top: 10px;
+}
+
+.social-media-icons a {
+    display: inline-block;
+    margin: 0 10px; /* Add horizontal spacing between icons */
+}
+
+.social-media-icons img {
+    width: 32px; /* Increase size for better visibility */
+    height: 32px;
+}
+
+@media (max-width: 768px) {
+    .footer-column {
+        flex: 100%;
+        margin-bottom: 40px; /* Increase bottom margin for better spacing */
+    }
+}
+
