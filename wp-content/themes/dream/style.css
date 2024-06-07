@@ -1933,19 +1933,20 @@ p {
 
 .staff-name {
     font-size: 1.2em;
-    margin: 10px 0 5px;
+    margin: 5px 0;
     color: #333;
 }
 
 .staff-title {
     font-size: 1em;
     color: #777;
-    margin-bottom: 10px;
+    margin: 3px 0;
 }
 
 .staff-email a {
     color: #0073aa;
     text-decoration: none;
+    margin: 3px 0;
 }
 
 .staff-email a:hover {
