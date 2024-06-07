@@ -264,6 +264,7 @@ function enable_simple_page_ordering_for_slider() {
 // Hook the enable_simple_page_ordering_for_slider function to the admin_enqueue_scripts action
 add_action('admin_enqueue_scripts', 'enable_simple_page_ordering_for_slider');
 
+
 // Customize the admin query to order slider items by menu order
 function customize_slider_admin_order($query) {
     // Check if we are not in the admin area

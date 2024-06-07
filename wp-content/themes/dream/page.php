@@ -12,7 +12,6 @@
  * @package DREAM
  */
 
-
 get_header(); ?>
 
 <!-- If the current page is the front page, display the media slider. -->
@@ -141,12 +140,46 @@ get_header(); ?>
 
             endwhile; // End of the loop.
             ?>
-            <div class="child-page-right-column">
+
+            <?php if (is_page('staff')) : ?>
                 <?php
-				if ( has_post_thumbnail() ) {
-					the_post_thumbnail();
-				}
-				?>
+                // Fetch staff data from Pods
+                $staff_pod = pods('staff');
+                $staff_pod->find(); // Fetch all staff members
+                
+                echo '<div class="staff-container">';
+                
+                // Check if any records are found
+                if ($staff_pod->total_found() > 0) {
+                    // Loop through each staff member
+                    while ($staff_pod->fetch()) {
+                        $first_name = $staff_pod->field('first_name');
+                        $last_name = $staff_pod->field('last_name');
+                        $photo = $staff_pod->field('photo');
+                        $staff_title = $staff_pod->field('staff_title');
+                        $email = $staff_pod->field('email');
+                        
+                        echo '<div class="staff-member">';
+                        echo '<div class="staff-photo"><img src="' . esc_url($photo['guid']) . '" alt="' . esc_attr($first_name . ' ' . $last_name) . '"></div>';
+                        echo '<div class="staff-info">';
+                        echo '<h3 class="staff-name">' . esc_html($first_name . ' ' . $last_name) . '</h3>';
+                        echo '<p class="staff-title">' . esc_html($staff_title) . '</p>';
+                        echo '<p class="staff-email"><a href="mailto:' . esc_attr($email) . '">' . esc_html($email) . '</a></p>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo '<p>No staff members found.</p>';
+                }
+                
+                echo '</div>';
+                ?>
+            <?php endif; ?>
+            
+            <div class="child-page-right-column">
+                <?php if ( has_post_thumbnail() ) {
+                    the_post_thumbnail();
+                } ?>
             </div>
         <?php endif; ?>
     </div> <!-- .content-wrapper -->
@@ -156,8 +189,7 @@ get_header(); ?>
     <div class="single-column-wrapper">
         <div class="parallax-section">
             <div class="parallax-background"></div>
-            <div class="parallax-content">
-            </div>
+            <div class="parallax-content"></div>
         </div>
     </div>
     <?php endif; ?>

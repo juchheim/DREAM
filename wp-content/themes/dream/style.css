@@ -1897,3 +1897,57 @@ p {
     }
 }
 
+
+/* staff */ 
+
+.staff-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.staff-member {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.staff-member:hover {
+    transform: translateY(-5px);
+}
+
+.staff-photo img {
+    width: 100%;
+    height: auto;
+}
+
+.staff-info {
+    padding: 15px;
+}
+
+.staff-name {
+    font-size: 1.2em;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+.staff-title {
+    font-size: 1em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.staff-email a {
+    color: #0073aa;
+    text-decoration: none;
+}
+
+.staff-email a:hover {
+    text-decoration: underline;
+}
