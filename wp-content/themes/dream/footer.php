@@ -35,7 +35,7 @@
             </div>
             <div class="footer-column">
                 <div class="site-info">
-                    <img src="/wp-content/uploads/2024/06/dream_logo_footer.png" alt="Dream Innovations Inc. Logo" />
+                    <img src="/wp-content/uploads/2024/06/footer_logo.png" alt="Dream Innovations Inc. Logo" />
                     <p>&copy; <?php echo date('Y'); ?> Dream Innovations Inc. All rights reserved.</p>
                 </div>
             </div>
