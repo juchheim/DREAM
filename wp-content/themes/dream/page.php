@@ -141,6 +141,44 @@ get_header(); ?>
             endwhile; // End of the loop.
             ?>
 
+<!-- Gallery section added here -->
+<?php if (is_page('gallery')) : ?>
+    <div class="gallery">
+        <?php
+        $gallery_pod = pods('gallery', array('limit' => -1));
+        while ($gallery_pod->fetch()) {
+            $images = $gallery_pod->field('image');
+            $videos = $gallery_pod->field('video');
+            if (!empty($images)) {
+                foreach ($images as $image) {
+                    if (isset($image['guid'])) {
+                        echo '<div class="gallery-item" data-type="image" data-url="' . esc_url($image['guid']) . '">';
+                        echo '<img src="' . esc_url($image['guid']) . '" alt="Gallery Image">';
+                        echo '</div>';
+                    }
+                }
+            }
+            if (!empty($videos)) {
+                foreach ($videos as $video) {
+                    if (isset($video['guid'])) {
+                        echo '<div class="gallery-item" data-type="video" data-url="' . esc_url($video['guid']) . '">';
+                        echo '<video controls>';
+                        echo '<source src="' . esc_url($video['guid']) . '" type="video/mp4">';
+                        echo 'Your browser does not support the video tag.';
+                        echo '</video>';
+                        echo '</div>';
+                    }
+                }
+            }
+        }
+        ?>
+    </div>
+    <script src="<?php echo get_template_directory_uri(); ?>/js/gallery.js"></script>
+<?php endif; ?>
+<!-- End of Gallery section -->
+
+
+
             <?php if (is_page('staff')) : ?>
                 <?php
                 // Fetch staff data from Pods

@@ -1,0 +1,19 @@
+
+.post-type-wpvr_item span#wpvr-copy-shortcode-listing {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 5px;
+}
+.post-type-wpvr_item .wpvr-listing-shortcode {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-type-wpvr_item .wpvr-copy-shortcode-listing:hover svg path {
+    fill: blue; /* Change 'backblu' to the desired color */
+}
+.post-type-wpvr_item .copy-shortcode-text {
+    display:none
+}

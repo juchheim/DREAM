@@ -24,12 +24,12 @@
             <?php endif; ?>
         </div>
         <nav class="site-navigation">
-            <?php wp_nav_menu(array(
-                'theme_location' => 'main-menu',
-                'menu_class'     => 'main-menu',
-                'container'      => false,
-            )); ?>
-        </nav>
+			<?php wp_nav_menu(array(
+				'theme_location' => 'main-menu',
+				'menu_class'     => 'main-menu',
+				'container'      => false,
+			)); ?>
+		</nav>
         <div class="hamburger" onclick="toggleMobileMenu()">
             ☰
         </div>
@@ -72,13 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const header = document.querySelector('.site-header');
         let primaryDiv;
         <?php if (is_front_page()) : ?>
-            console.log('This is the front page.');
             primaryDiv = document.querySelector('.media-slider'); // for the front page
-            console.log('Front page, selected media-slider:', primaryDiv);
         <?php else: ?>
-            console.log('This is not the front page or blog home page.');
             primaryDiv = document.querySelector('.content-area'); // for other pages, to adjust for spacing re: shrinking header
-            console.log('Not front page or blog home page, selected content-area:', primaryDiv);
         <?php endif; ?>
 
         if (primaryDiv) {

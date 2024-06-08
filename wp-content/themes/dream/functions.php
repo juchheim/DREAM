@@ -156,6 +156,7 @@ function dream_custom_scripts() {
         null, // Version
         true // Load in the footer
     );
+	wp_enqueue_script('dream-gallery', get_template_directory_uri() . '/js/gallery.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'dream_custom_scripts');
 

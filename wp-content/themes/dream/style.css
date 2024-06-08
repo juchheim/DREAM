@@ -1674,12 +1674,12 @@ p {
 
 /* For child pages: Add margin-top to the primary div when the header shrinks */
 .content-area.header-fixed {
-    margin-top: 195px; 
+    margin-top: 0px; 
 }
 
 /* For home: Add margin-top to the primary div when the header shrinks */
 .media-slider.header-fixed {
-    margin-top: 110px;
+    margin-top: 0px;
 }
 
 @media (max-width: 1000px) {
@@ -1951,4 +1951,103 @@ p {
 
 .staff-email a:hover {
     text-decoration: underline;
+}
+
+/* gallery */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.gallery-item {
+    width: calc(33.333% - 1rem);
+    cursor: pointer;
+    position: relative;
+}
+
+.gallery-item img, .gallery-item video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.shadowbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.shadowbox.active {
+    display: flex;
+}
+
+.shadowbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.shadowbox-content img,
+.shadowbox-content video {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.shadowbox-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* carats for nav menu parent items */
+.main-menu > li.menu-item-has-children > a {
+	position: relative;
+	padding-right: 20px; /* Adjust padding to accommodate the carat */
+}
+.main-menu > li.menu-item-has-children > a::after {
+	content: "›"; /* Carat symbol */
+	position: absolute;
+	right: 0;
+	transition: transform 0.3s ease;
+}
+.main-menu > li.menu-item-has-children:hover > a::after {
+	transform: rotate(90deg); /* Rotate carat on hover */
+}
+.shrink .site-navigation {
+	padding: 10px 0; /* Adjust as needed */
+}
+.header-fixed {
+	padding-top: 80px; /* Adjust as needed */
+}
+.mobile-menu.show {
+	display: block;
+}
+.mobile-menu {
+	display: none;
+}
+
+/* VR */
+
+#master-container {
+	max-width:100% !important; 
+	width: 100% !important; 
+	height: 600px !important;
 }
