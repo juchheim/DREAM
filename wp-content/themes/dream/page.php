@@ -256,9 +256,18 @@ get_header(); ?>
             <?php endif; ?>
             
             <div class="child-page-right-column">
-                <?php if ( has_post_thumbnail() ) {
-                    the_post_thumbnail();
-                } ?>
+
+			<?php
+
+				if ( is_page('contact') ) {
+					echo do_shortcode('[contact-form-7 id="3162945" title="contact"]');
+				} elseif ( has_post_thumbnail() ) {
+						the_post_thumbnail();
+					} 
+				
+			?>
+
+
             </div>
         <?php endif; ?>
     </div> <!-- .content-wrapper -->
