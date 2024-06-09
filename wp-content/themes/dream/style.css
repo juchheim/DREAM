@@ -2044,10 +2044,40 @@ p {
 	display: none;
 }
 
-/* VR */
+/* virtual tour */
 
 #master-container {
 	max-width:100% !important; 
 	width: 100% !important; 
 	height: 600px !important;
+}
+
+.vr-container {
+	width: 70%;
+	height: 400px;
+	margin: 0 auto; /* Center the container horizontally */
+	display: block;
+  }
+  
+
+.panorama-section {
+    margin-bottom: 50px;
+}
+
+.panorama-title {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.panorama-description {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.panorama-content {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
 }

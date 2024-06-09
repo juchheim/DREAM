@@ -1,3 +1,4 @@
+<!-- page.php -->
 <?php
 /**
  * The template for displaying all pages
@@ -28,32 +29,32 @@ get_header(); ?>
          $media_array = [];
          
          // Loop through the fetched records and prepare the media array
-		 while ($pods->fetch()) {
-			$videos = $pods->field('video'); 
-			$images = $pods->field('image'); 
-			
-			// Check if there are any videos
-			if (!empty($videos)) {
-				// Loop through each video
-				foreach ($videos as $video) {
-					// Add the video to the media array with type 'video' and the video's URL
-					$media_array[] = array(
-						'type' => 'video',
-						'url' => $video['guid']
-					);
-				}
-			// Check if there are any images
-			} elseif (!empty($images)) {
-				// Loop through each image
-				foreach ($images as $image) {
-					// Add the image to the media array with type 'image' and the image's URL
-					$media_array[] = array(
-						'type' => 'image',
-						'url' => $image['guid']
-					);
-				}
-			}
-		}
+         while ($pods->fetch()) {
+             $videos = $pods->field('video'); 
+             $images = $pods->field('image'); 
+             
+             // Check if there are any videos
+             if (!empty($videos)) {
+                 // Loop through each video
+                 foreach ($videos as $video) {
+                     // Add the video to the media array with type 'video' and the video's URL
+                     $media_array[] = array(
+                         'type' => 'video',
+                         'url' => $video['guid']
+                     );
+                 }
+             // Check if there are any images
+             } elseif (!empty($images)) {
+                 // Loop through each image
+                 foreach ($images as $image) {
+                     // Add the image to the media array with type 'image' and the image's URL
+                     $media_array[] = array(
+                         'type' => 'image',
+                         'url' => $image['guid']
+                     );
+                 }
+             }
+         }
 
 
          $media_count = count($media_array);
@@ -141,43 +142,83 @@ get_header(); ?>
             endwhile; // End of the loop.
             ?>
 
-<!-- Gallery section added here -->
-<?php if (is_page('gallery')) : ?>
-    <div class="gallery">
-        <?php
-        $gallery_pod = pods('gallery', array('limit' => -1));
-        while ($gallery_pod->fetch()) {
-            $images = $gallery_pod->field('image');
-            $videos = $gallery_pod->field('video');
-            if (!empty($images)) {
-                foreach ($images as $image) {
-                    if (isset($image['guid'])) {
-                        echo '<div class="gallery-item" data-type="image" data-url="' . esc_url($image['guid']) . '">';
-                        echo '<img src="' . esc_url($image['guid']) . '" alt="Gallery Image">';
-                        echo '</div>';
-                    }
-                }
-            }
-            if (!empty($videos)) {
-                foreach ($videos as $video) {
-                    if (isset($video['guid'])) {
-                        echo '<div class="gallery-item" data-type="video" data-url="' . esc_url($video['guid']) . '">';
-                        echo '<video controls>';
-                        echo '<source src="' . esc_url($video['guid']) . '" type="video/mp4">';
-                        echo 'Your browser does not support the video tag.';
-                        echo '</video>';
-                        echo '</div>';
-                    }
-                }
-            }
-        }
-        ?>
-    </div>
-    <script src="<?php echo get_template_directory_uri(); ?>/js/gallery.js"></script>
-<?php endif; ?>
-<!-- End of Gallery section -->
+
+            <!-- Virtual Tour -->
+            <?php if (is_page('virtual-tour')) : ?>
+				<?php
+				// Fetch panorama images from Pods
+				$virtual_tour_pod = pods('virtual_tour');
+				$params = array(
+					'limit' => -1 // Fetch all records
+				);
+				$virtual_tour_pod->find($params);
+				$panorama_images = [];
+
+				while ($virtual_tour_pod->fetch()) {
+					$title = $virtual_tour_pod->field('title');
+					$panorama_image = $virtual_tour_pod->field('panorama_image');
+					if ($panorama_image && isset($panorama_image['guid'])) {
+						$panorama_images[] = array('title' => $title, 'url' => $panorama_image['guid']);
+					}
+				}
+
+				// Log the contents of the panorama_images array to the console
+				echo '<script>console.log(' . json_encode($panorama_images) . ');</script>';
+
+				if (!empty($panorama_images)) {
+					foreach ($panorama_images as $index => $image) {
+						echo '<div class="panorama-section">';
+						echo '<h3 class="panorama-title">' . esc_html($image['title']) . '</h3>';
+						echo '<div id="panorama-' . $index . '" class="vr-container" data-panorama="' . esc_url($image['url']) . '"></div>';
+						echo '<div class="panorama-content">';
+						// Output the content of the custom post type
+						the_content();
+						echo '</div>';
+						echo '</div>';
+					}
+				} else {
+					echo '<script>console.log("No panorama images found.");</script>';
+				}
+				?>
+            <?php endif; ?>
+            <!-- End of Virtual Tour section -->
 
 
+            <!-- Gallery section added here -->
+            <?php if (is_page('gallery')) : ?>
+                <div class="gallery">
+                    <?php
+                    $gallery_pod = pods('gallery', array('limit' => -1));
+                    while ($gallery_pod->fetch()) {
+                        $images = $gallery_pod->field('image');
+                        $videos = $gallery_pod->field('video');
+                        if (!empty($images)) {
+                            foreach ($images as $image) {
+                                if (isset($image['guid'])) {
+                                    echo '<div class="gallery-item" data-type="image" data-url="' . esc_url($image['guid']) . '">';
+                                    echo '<img src="' . esc_url($image['guid']) . '" alt="Gallery Image">';
+                                    echo '</div>';
+                                }
+                            }
+                        }
+                        if (!empty($videos)) {
+                            foreach ($videos as $video) {
+                                if (isset($video['guid'])) {
+                                    echo '<div class="gallery-item" data-type="video" data-url="' . esc_url($video['guid']) . '">';
+                                    echo '<video controls>';
+                                    echo '<source src="' . esc_url($video['guid']) . '" type="video/mp4">';
+                                    echo 'Your browser does not support the video tag.';
+                                    echo '</video>';
+                                    echo '</div>';
+                                }
+                            }
+                        }
+                    }
+                    ?>
+                </div>
+                <script src="<?php echo get_template_directory_uri(); ?>/js/gallery.js"></script>
+            <?php endif; ?>
+            <!-- End of Gallery section -->
 
             <?php if (is_page('staff')) : ?>
                 <?php

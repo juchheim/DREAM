@@ -293,3 +293,23 @@ function dream_add_body_class_for_no_feature_image($classes) {
 }
 // Hook the dream_add_body_class_for_no_feature_image function to the body_class filter
 add_filter('body_class', 'dream_add_body_class_for_no_feature_image');
+
+
+// functions.php
+function enqueue_vr_scripts() {
+    // Enqueue three.js library from CDN
+    wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
+    
+    // Enqueue Pannellum CSS from CDN
+    wp_enqueue_style('pannellum-styles', 'https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css');
+    
+    // Enqueue Pannellum JS from CDN
+    wp_enqueue_script('pannellum-script', 'https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js', array('three-js'), null, true);
+    
+    // Enqueue custom VR script
+    wp_enqueue_script('vr-script', get_template_directory_uri() . '/js/360.js', array('pannellum-script'), null, true);
+    
+    // Enqueue custom styles
+    wp_enqueue_style('custom-styles', get_template_directory_uri() . '/style.css');
+}
+add_action('wp_enqueue_scripts', 'enqueue_vr_scripts');
