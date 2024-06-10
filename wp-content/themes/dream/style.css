@@ -1210,7 +1210,6 @@ body, html {
     flex: 2;
     display: flex;
     justify-content: flex-end;
-    padding-right: 50px;
 }
 
 .main-menu {
@@ -1260,7 +1259,7 @@ body, html {
 }
 
 .main-menu ul {
-	padding-right:74px;
+	padding-right:124px;
 }
 
 .main-menu ul li {
@@ -2031,8 +2030,14 @@ p {
 .main-menu > li.menu-item-has-children:hover > a::after {
 	transform: rotate(90deg); /* Rotate carat on hover */
 }
+
+.site-navigation {
+    padding-right: 100px;
+}
+
 .shrink .site-navigation {
 	padding: 10px 0; /* Adjust as needed */
+    padding-right:100px;
 }
 .header-fixed {
 	padding-top: 80px; /* Adjust as needed */
@@ -2080,4 +2085,65 @@ p {
     width: 70%;
     margin: 0 auto;
     text-align: center;
+}
+
+.wpcf7 {
+    width:80%;
+    padding: 30px 30px 30px 30px;
+    margin: 20px 0 50px 30px;
+    background-color: #febd00;
+    border-radius: 8px;
+    box-shadow: 0 0px 6px rgba(0, 0, 0, 0.4);
+}
+
+input[type="text"] {
+    width: 100%; /* Full width */
+    padding: 12px 20px; /* Padding inside the text field */
+    margin: 8px 0; /* Margin outside the text field */
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+    font-size: 16px; /* Font size */
+    border: 1px solid #ccc; /* Light gray border */
+    background-color: #f9f9f9; /* Light gray background */
+    border-radius: 6px; /* Rounded corners */
+    border: 1px solid #555; /* Darker border when focused */
+    outline: none; /* Remove the default outline */
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1); /* Add a shadow effect */
+}
+
+input[type="email"] {
+    width: 100%; /* Full width */
+    padding: 12px 20px; /* Padding inside the text field */
+    margin: 8px 0; /* Margin outside the text field */
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+    font-size: 16px; /* Font size */
+    border: 1px solid #ccc; /* Light gray border */
+    background-color: #f9f9f9; /* Light gray background */
+    border-radius: 6px; /* Rounded corners */
+    border: 1px solid #555; /* Darker border when focused */
+    outline: none; /* Remove the default outline */
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1); /* Add a shadow effect */
+}
+
+textarea {
+    height:150px;
+    border: 1px solid #ccc; /* Light gray border */
+    background-color: #f9f9f9; /* Light gray background */
+    border-radius: 6px; /* Rounded corners */
+    padding: 12px 20px; /* Padding inside the text field */
+    margin: 8px 0; /* Margin outside the text field */
+    border: 1px solid #555; 
+    outline: none; /* Remove the default outline */
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1); /* Add a shadow effect */
+}
+
+input[type="submit"] {
+    background-color: darkblue;
+    color: white;
+    border-radius: 6px; /* Rounded corners */
+    padding: 10px 10px 10px 10px;
+}
+
+.wpgmza_map {
+    border-radius: 6px;
+    box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
 }
