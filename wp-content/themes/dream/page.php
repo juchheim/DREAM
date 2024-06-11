@@ -145,6 +145,7 @@ get_header(); ?>
 
             <!-- Virtual Tour -->
             <?php if (is_page('virtual-tour')) : ?>
+                <div class="panoramas">
 				<?php
 				// Fetch panorama images from Pods
 				$virtual_tour_pod = pods('virtual_tour');
@@ -181,6 +182,7 @@ get_header(); ?>
 				}
 				?>
             <?php endif; ?>
+            
             <!-- End of Virtual Tour section -->
 
 

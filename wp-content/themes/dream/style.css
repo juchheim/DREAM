@@ -1748,7 +1748,9 @@ p {
 .mobile-menu.show {
     display: block; /* Show the mobile menu when the 'show' class is added */
 }
-
+.content-wrapper article {
+	padding-left: 100px;
+}
 .mobile-menu-header {
     display: flex;
     justify-content: flex-end;
@@ -1893,6 +1895,13 @@ p {
     .footer-column {
         flex: 100%;
         margin-bottom: 40px; /* Increase bottom margin for better spacing */
+    }
+
+    .single-column-layout article {
+        padding: 0 20px 0 20px;
+        padding-right:0 !important;
+        margin:0;
+        margin-right:0;
     }
 }
 
@@ -2058,12 +2067,17 @@ p {
 }
 
 .vr-container {
-	width: 70%;
-	height: 400px;
+	width: 90%;
+	height: 500px;
 	margin: 0 auto; /* Center the container horizontally */
 	display: block;
   }
   
+.panoramas {
+    background-color: #0058b2;
+    border-radius: 8px;
+    box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
+}
 
 .panorama-section {
     margin-bottom: 50px;
@@ -2071,8 +2085,10 @@ p {
 
 .panorama-title {
     text-align: center;
-    font-size: 24px;
-    margin-top: 20px;
+    font-size: 32px;
+    margin-top: 30px;
+    color: white;
+    text-transform: uppercase;
 }
 
 .panorama-description {
@@ -2082,9 +2098,10 @@ p {
 }
 
 .panorama-content {
-    width: 70%;
+    width: 90%;
     margin: 0 auto;
     text-align: center;
+    color: white;
 }
 
 .wpcf7 {
@@ -2147,3 +2164,4 @@ input[type="submit"] {
     border-radius: 6px;
     box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
 }
+
