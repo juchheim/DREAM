@@ -295,7 +295,6 @@ function dream_add_body_class_for_no_feature_image($classes) {
 add_filter('body_class', 'dream_add_body_class_for_no_feature_image');
 
 
-// functions.php
 function enqueue_vr_scripts() {
     // Enqueue three.js library from CDN
     wp_enqueue_script('three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', array(), null, true);
@@ -313,3 +312,5 @@ function enqueue_vr_scripts() {
     wp_enqueue_style('custom-styles', get_template_directory_uri() . '/style.css');
 }
 add_action('wp_enqueue_scripts', 'enqueue_vr_scripts');
+
+

@@ -1219,9 +1219,10 @@ body, html {
     display: flex;
 }
 
-.main-menu li {
+.sub-menu li {
     position: relative;
     min-height: 28px;
+    padding-left:20px;
 }
 
 .main-menu li a {
@@ -2048,12 +2049,17 @@ p {
 	padding: 10px 0; /* Adjust as needed */
     padding-right:100px;
 }
+
 .header-fixed {
 	padding-top: 80px; /* Adjust as needed */
 }
+
+
+
 .mobile-menu.show {
 	display: block;
 }
+
 .mobile-menu {
 	display: none;
 }
@@ -2124,7 +2130,7 @@ input[type="text"] {
     border-radius: 6px; /* Rounded corners */
     border: 1px solid #555; /* Darker border when focused */
     outline: none; /* Remove the default outline */
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1); /* Add a shadow effect */
+    box-shadow: 0 0 5px rgb(52, 52, 52, .2); /* Add a shadow effect */
 }
 
 input[type="email"] {
@@ -2138,7 +2144,7 @@ input[type="email"] {
     border-radius: 6px; /* Rounded corners */
     border: 1px solid #555; /* Darker border when focused */
     outline: none; /* Remove the default outline */
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1); /* Add a shadow effect */
+    box-shadow: 0 0 5px rgb(52, 52, 52, .2); /* Add a shadow effect */
 }
 
 textarea {
@@ -2150,18 +2156,41 @@ textarea {
     margin: 8px 0; /* Margin outside the text field */
     border: 1px solid #555; 
     outline: none; /* Remove the default outline */
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1); /* Add a shadow effect */
+    box-shadow: 0 0 5px rgb(52, 52, 52, .2); /* Add a shadow effect */
 }
 
 input[type="submit"] {
-    background-color: darkblue;
+    background-color: #0058b2;
     color: white;
     border-radius: 6px; /* Rounded corners */
     padding: 10px 10px 10px 10px;
+    box-shadow: 0 0 5px rgba(52, 52, 52, 0.2); /* Add a shadow effect */
+    cursor: pointer; /* Change cursor to hand on hover */
 }
+
+input[type="submit"]:hover {
+    box-shadow: 0 0 5px rgba(52, 52, 52, 0.6); /* Enhance shadow effect on hover */
+}
+
 
 .wpgmza_map {
     border-radius: 6px;
     box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
 }
 
+@keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(300px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .wpcf7 {
+    opacity: 0;
+    animation: fadeInUp 1s ease-in-out forwards;
+  }
+  

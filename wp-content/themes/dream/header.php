@@ -39,7 +39,7 @@
             </div>
             <ul>
                 <?php wp_nav_menu(array(
-                    'theme_location' => 'mobile-menu',
+                    'theme_location' => 'main-menu',
                     'menu_class'     => 'mobile-menu-items',
                     'container'      => false,
                 )); ?>
@@ -90,4 +90,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.wpcf7');
+    
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    observer.observe(form);
+});
+
 </script>
