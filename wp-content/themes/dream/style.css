@@ -1194,9 +1194,6 @@ body, html {
     margin-top: 77px;
 }
 
-
-
-
 .site-header .container {
     display: flex;
     justify-content: space-between;
@@ -1384,6 +1381,7 @@ body, html {
 
     .hamburger {
         display: flex;
+        padding-right:50px;
     }
 
     .mobile-menu {
@@ -1411,6 +1409,10 @@ body, html {
 
     .site-branding {
         flex: 1 0 auto !important;
+    }
+
+    .site-header .site-branding {
+        padding-left:0;
     }
 }
 
