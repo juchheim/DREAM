@@ -979,6 +979,16 @@ textarea {
 	width: 100%;
 }
 
+.gallery-item img {
+    border-radius: 6px; /* Rounded corners */
+    box-shadow: 0 0 5px rgb(52, 52, 52, .2); /* Add a shadow effect */
+}
+
+.gallery-item video {
+    border-radius: 6px; /* Rounded corners */
+    box-shadow: 0 0 5px rgb(52, 52, 52, .2); /* Add a shadow effect */
+}
+
 .gallery-columns-2 {
 	grid-template-columns: repeat(2, 1fr);
 }
