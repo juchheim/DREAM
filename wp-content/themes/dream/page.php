@@ -146,42 +146,46 @@ get_header(); ?>
             <!-- Virtual Tour -->
             <?php if (is_page('virtual-tour')) : ?>
                 <div class="panoramas">
-				<?php
-				// Fetch panorama images from Pods
-				$virtual_tour_pod = pods('virtual_tour');
-				$params = array(
-					'limit' => -1 // Fetch all records
-				);
-				$virtual_tour_pod->find($params);
-				$panorama_images = [];
+                    <?php
+                    // Fetch panorama images from Pods
+                    $virtual_tour_pod = pods('virtual_tour');
+                    $params = array(
+                        'limit' => -1 // Fetch all records
+                    );
+                    $virtual_tour_pod->find($params);
+                    $panorama_images = [];
 
-				while ($virtual_tour_pod->fetch()) {
-					$title = $virtual_tour_pod->field('title');
-					$panorama_image = $virtual_tour_pod->field('panorama_image');
-					if ($panorama_image && isset($panorama_image['guid'])) {
-						$panorama_images[] = array('title' => $title, 'url' => $panorama_image['guid']);
-					}
-				}
+                    while ($virtual_tour_pod->fetch()) {
+                        $title = $virtual_tour_pod->field('title');
+                        $panorama_image = $virtual_tour_pod->field('panorama_image');
+                        $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
+                        if ($panorama_image && isset($panorama_image['guid'])) {
+                            $panorama_images[] = array('title' => $title, 'url' => $panorama_image['guid'], 'main_paragraph_text' => $main_paragraph_text);
+                        }
+                    }
 
-				// Log the contents of the panorama_images array to the console
-				echo '<script>console.log(' . json_encode($panorama_images) . ');</script>';
+                    // Log the contents of the panorama_images array to the console
+                    echo '<script>console.log(' . json_encode($panorama_images) . ');</script>';
 
-				if (!empty($panorama_images)) {
-					foreach ($panorama_images as $index => $image) {
-						echo '<div class="panorama-section">';
-						echo '<h3 class="panorama-title">' . esc_html($image['title']) . '</h3>';
-						echo '<div id="panorama-' . $index . '" class="vr-container" data-panorama="' . esc_url($image['url']) . '"></div>';
-						echo '<div class="panorama-content">';
-						// Output the content of the custom post type
-						the_content();
-						echo '</div>';
-						echo '</div>';
-					}
-				} else {
-					echo '<script>console.log("No panorama images found.");</script>';
-				}
-				?>
+                    if (!empty($panorama_images)) {
+                        foreach ($panorama_images as $index => $image) {
+                            echo '<div class="panorama-section">';
+                            echo '<h3 class="panorama-title">' . esc_html($image['title']) . '</h3>';
+                            echo '<div id="panorama-' . $index . '" class="vr-container" data-panorama="' . esc_url($image['url']) . '"></div>';
+                            echo '<div class="panorama-content">';
+                            // Output the main paragraph text of the Pod item
+                            echo '<p>' . wp_kses_post($image['main_paragraph_text']) . '</p>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo '<script>console.log("No panorama images found.");</script>';
+                    }
+                    ?>
+                </div>
             <?php endif; ?>
+
+
             
             <!-- End of Virtual Tour section -->
 
@@ -226,7 +230,10 @@ get_header(); ?>
                 <?php
                 // Fetch staff data from Pods
                 $staff_pod = pods('staff');
-                $staff_pod->find(); // Fetch all staff members
+                $params = array(
+                    'orderby' => 'priority DESC', // Order by priority descending
+                );
+                $staff_pod->find($params); // Fetch all staff members with ordering
                 
                 echo '<div class="staff-container">';
                 
@@ -241,7 +248,10 @@ get_header(); ?>
                         $email = $staff_pod->field('email');
                         
                         echo '<div class="staff-member">';
-                        echo '<div class="staff-photo"><img src="' . esc_url($photo['guid']) . '" alt="' . esc_attr($first_name . ' ' . $last_name) . '"></div>';
+                        // Check if photo is available
+                        if (!empty($photo)) {
+                            echo '<div class="staff-photo"><img src="' . esc_url($photo['guid']) . '" alt="' . esc_attr($first_name . ' ' . $last_name) . '"></div>';
+                        }
                         echo '<div class="staff-info">';
                         echo '<h3 class="staff-name">' . esc_html($first_name . ' ' . $last_name) . '</h3>';
                         echo '<p class="staff-title">' . esc_html($staff_title) . '</p>';
@@ -251,7 +261,7 @@ get_header(); ?>
                     }
                 } else {
                     echo '<p>No staff members found.</p>';
-                }
+}
                 
                 echo '</div>';
                 ?>

@@ -312,4 +312,9 @@ function enqueue_vr_scripts() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_vr_scripts');
 
+// Enable auto-updates for plugins
+add_filter('auto_update_plugin', '__return_true');
+
+// Enable auto-updates for themes
+add_filter('auto_update_theme', '__return_true');
 
