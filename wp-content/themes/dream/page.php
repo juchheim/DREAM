@@ -125,7 +125,7 @@ get_header(); ?>
             </div>
             <!-- Right column with an image -->
             <div class="right-column">
-                <div class="tall-box"><img src="/wp-content/uploads/2024/06/vr-kid2.png" class="slide-in" /></div>
+                <div class="tall-box"><img src="/wp-content/uploads/2024/07/kid_with_network_cable.png" class="slide-in" /></div>
             </div>
         <?php else : ?>
             <!-- For all other pages, display content and the featured image -->
