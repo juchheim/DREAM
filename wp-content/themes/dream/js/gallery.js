@@ -1,48 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
     const galleryItems = document.querySelectorAll('.gallery-item');
-
-    // Create shadowbox elements only if they don't already exist
-    let shadowbox = document.querySelector('.shadowbox');
-    if (!shadowbox) {
-        shadowbox = document.createElement('div');
-        shadowbox.classList.add('shadowbox');
-        const shadowboxContent = document.createElement('div');
-        shadowboxContent.classList.add('shadowbox-content');
-        const closeButton = document.createElement('button');
-        closeButton.classList.add('shadowbox-close');
-        closeButton.innerHTML = '&times;';
-
-        shadowbox.appendChild(shadowboxContent);
-        shadowbox.appendChild(closeButton);
-        document.body.appendChild(shadowbox);
-
-        closeButton.addEventListener('click', function() {
-            shadowbox.classList.remove('active');
-            shadowboxContent.innerHTML = '';
-        });
-    }
-
-    const shadowboxContent = shadowbox.querySelector('.shadowbox-content');
+    const modal = document.getElementById('galleryModal');
+    const modalMedia = modal.querySelector('.modal-media');
+    const modalCaption = modal.querySelector('.modal-caption');
+    const closeModal = modal.querySelector('.close');
 
     galleryItems.forEach(item => {
         item.addEventListener('click', function() {
-            const mediaType = this.dataset.type;
-            const mediaUrl = this.dataset.url;
+            const type = item.getAttribute('data-type');
+            const url = item.getAttribute('data-url');
+            const caption = item.getAttribute('data-caption');
 
-            shadowboxContent.innerHTML = '';
-
-            if (mediaType === 'image') {
-                const img = document.createElement('img');
-                img.src = mediaUrl;
-                shadowboxContent.appendChild(img);
-            } else if (mediaType === 'video') {
+            modalMedia.innerHTML = ''; // Clear previous content
+            if (type === 'video') {
                 const video = document.createElement('video');
-                video.src = mediaUrl;
                 video.controls = true;
-                shadowboxContent.appendChild(video);
+                video.src = url;
+                modalMedia.appendChild(video);
+            } else {
+                const img = document.createElement('img');
+                img.src = url;
+                modalMedia.appendChild(img);
             }
 
-            shadowbox.classList.add('active');
+            modalCaption.textContent = caption;
+
+            modal.style.display = 'block';
         });
+    });
+
+    closeModal.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
     });
 });

@@ -32,30 +32,38 @@ get_header(); ?>
          while ($pods->fetch()) {
              $videos = $pods->field('video'); 
              $images = $pods->field('image'); 
-             
+             $link = $pods->field('link');
+             $caption = $pods->field('caption'); // Fetch the caption field
+             $slide_title = $pods->field('slide_title'); // Fetch the slide title field
+
              // Check if there are any videos
              if (!empty($videos)) {
                  // Loop through each video
                  foreach ($videos as $video) {
-                     // Add the video to the media array with type 'video' and the video's URL
+                     // Add the video to the media array with type 'video', the video's URL, and the link URL
                      $media_array[] = array(
                          'type' => 'video',
-                         'url' => $video['guid']
+                         'url' => $video['guid'],
+                         'link' => $link,
+                         'caption' => $caption, // Add the caption to the media array
+                         'slide_title' => $slide_title // Add the slide title to the media array
                      );
                  }
              // Check if there are any images
              } elseif (!empty($images)) {
                  // Loop through each image
                  foreach ($images as $image) {
-                     // Add the image to the media array with type 'image' and the image's URL
+                     // Add the image to the media array with type 'image', the image's URL, and the link URL
                      $media_array[] = array(
                          'type' => 'image',
-                         'url' => $image['guid']
+                         'url' => $image['guid'],
+                         'link' => $link,
+                         'caption' => $caption, // Add the caption to the media array
+                         'slide_title' => $slide_title // Add the slide title to the media array
                      );
                  }
              }
          }
-
 
          $media_count = count($media_array);
 
@@ -64,9 +72,28 @@ get_header(); ?>
              $last_media = $media_array[$media_count - 1];
              echo '<div class="slide">';
              if ($last_media['type'] == 'video') {
-                 echo '<video src="' . $last_media['url'] . '" muted></video>';
+                 if (!empty($last_media['link'])) {
+                     echo '<a href="' . $last_media['link'] . '" target="_blank"><video src="' . $last_media['url'] . '" muted></video></a>';
+                 } else {
+                     echo '<video src="' . $last_media['url'] . '" muted></video>';
+                 }
              } else {
-                 echo '<img src="' . $last_media['url'] . '" />';
+                 if (!empty($last_media['link'])) {
+                     echo '<a href="' . $last_media['link'] . '" target="_blank"><img src="' . $last_media['url'] . '" /></a>';
+                 } else {
+                     echo '<img src="' . $last_media['url'] . '" />';
+                 }
+                 // Add the slide title and caption for the last image
+                 if (!empty($last_media['slide_title']) || !empty($last_media['caption'])) {
+                     echo '<div class="caption">';
+                     if (!empty($last_media['slide_title'])) {
+                         echo '<div class="slide-title">' . $last_media['slide_title'] . '</div>';
+                     }
+                     if (!empty($last_media['caption'])) {
+                         echo $last_media['caption'];
+                     }
+                     echo '</div>';
+                 }
              }
              echo '</div>';
 
@@ -74,9 +101,28 @@ get_header(); ?>
              foreach ($media_array as $media) {
                  echo '<div class="slide">';
                  if ($media['type'] == 'video') {
-                     echo '<video src="' . $media['url'] . '" muted></video>';
+                     if (!empty($media['link'])) {
+                         echo '<a href="' . $media['link'] . '" target="_blank"><video src="' . $media['url'] . '" muted></video></a>';
+                     } else {
+                         echo '<video src="' . $media['url'] . '" muted></video>';
+                     }
                  } else {
-                     echo '<img src="' . $media['url'] . '" />';
+                     if (!empty($media['link'])) {
+                         echo '<a href="' . $media['link'] . '" target="_blank"><img src="' . $media['url'] . '" /></a>';
+                     } else {
+                         echo '<img src="' . $media['url'] . '" />';
+                     }
+                     // Add the slide title and caption for each image
+                     if (!empty($media['slide_title']) || !empty($media['caption'])) {
+                         echo '<div class="caption">';
+                         if (!empty($media['slide_title'])) {
+                             echo '<div class="slide-title">' . $media['slide_title'] . '</div>';
+                         }
+                         if (!empty($media['caption'])) {
+                             echo $media['caption'];
+                         }
+                         echo '</div>';
+                     }
                  }
                  echo '</div>';
              }
@@ -85,9 +131,28 @@ get_header(); ?>
              $first_media = $media_array[0];
              echo '<div class="slide">';
              if ($first_media['type'] == 'video') {
-                 echo '<video src="' . $first_media['url'] . '" muted></video>';
+                 if (!empty($first_media['link'])) {
+                     echo '<a href="' . $first_media['link'] . '" target="_blank"><video src="' . $first_media['url'] . '" muted></video></a>';
+                 } else {
+                     echo '<video src="' . $first_media['url'] . '" muted></video>';
+                 }
              } else {
-                 echo '<img src="' . $first_media['url'] . '" />';
+                 if (!empty($first_media['link'])) {
+                     echo '<a href="' . $first_media['link'] . '" target="_blank"><img src="' . $first_media['url'] . '" /></a>';
+                 } else {
+                     echo '<img src="' . $first_media['url'] . '" />';
+                 }
+                 // Add the slide title and caption for the first image
+                 if (!empty($first_media['slide_title']) || !empty($first_media['caption'])) {
+                     echo '<div class="caption">';
+                     if (!empty($first_media['slide_title'])) {
+                         echo '<div class="slide-title">' . $first_media['slide_title'] . '</div>';
+                     }
+                     if (!empty($first_media['caption'])) {
+                         echo $first_media['caption'];
+                     }
+                     echo '</div>';
+                 }
              }
              echo '</div>';
          }
@@ -98,6 +163,9 @@ get_header(); ?>
      <button class="next" onclick="nextSlide()">&#10095;</button>
  </div>
 <?php endif; ?>
+
+
+
 
 <!-- Main content area -->
 <div id="primary" class="content-area">
@@ -126,6 +194,9 @@ get_header(); ?>
             <!-- Right column with an image -->
             <div class="right-column">
                 <div class="tall-box"><img src="/wp-content/uploads/2024/07/kid_with_network_cable.png" class="slide-in" /></div>
+            
+                <!-- insert new images here -->
+            
             </div>
         <?php else : ?>
             <!-- For all other pages, display content and the featured image -->
@@ -191,40 +262,54 @@ get_header(); ?>
 
 
             <!-- Gallery section added here -->
-            <?php if (is_page('gallery')) : ?>
-                <div class="gallery">
-                    <?php
-                    $gallery_pod = pods('gallery', array('limit' => -1));
-                    while ($gallery_pod->fetch()) {
-                        $images = $gallery_pod->field('image');
-                        $videos = $gallery_pod->field('video');
-                        if (!empty($images)) {
-                            foreach ($images as $image) {
-                                if (isset($image['guid'])) {
-                                    echo '<div class="gallery-item" data-type="image" data-url="' . esc_url($image['guid']) . '">';
-                                    echo '<img src="' . esc_url($image['guid']) . '" alt="Gallery Image">';
-                                    echo '</div>';
-                                }
-                            }
-                        }
-                        if (!empty($videos)) {
-                            foreach ($videos as $video) {
-                                if (isset($video['guid'])) {
-                                    echo '<div class="gallery-item" data-type="video" data-url="' . esc_url($video['guid']) . '">';
-                                    echo '<video controls>';
-                                    echo '<source src="' . esc_url($video['guid']) . '" type="video/mp4">';
-                                    echo 'Your browser does not support the video tag.';
-                                    echo '</video>';
-                                    echo '</div>';
-                                }
-                            }
-                        }
+<!-- Gallery section added here -->
+<?php if (is_page('gallery')) : ?>
+    <div class="gallery">
+        <?php
+        $gallery_pod = pods('gallery', array('limit' => -1));
+        while ($gallery_pod->fetch()) {
+            $images = $gallery_pod->field('image');
+            $videos = $gallery_pod->field('video');
+            $caption = $gallery_pod->field('caption');
+            
+            if (!empty($images)) {
+                foreach ($images as $image) {
+                    if (isset($image['guid'])) {
+                        echo '<div class="gallery-item" data-type="image" data-url="' . esc_url($image['guid']) . '" data-caption="' . esc_attr($caption) . '">';
+                        echo '<img src="' . esc_url($image['guid']) . '" alt="Gallery Image">';
+                        echo '</div>';
                     }
-                    ?>
-                </div>
-                <script src="<?php echo get_template_directory_uri(); ?>/js/gallery.js"></script>
-            <?php endif; ?>
-            <!-- End of Gallery section -->
+                }
+            }
+            if (!empty($videos)) {
+                foreach ($videos as $video) {
+                    if (isset($video['guid'])) {
+                        echo '<div class="gallery-item" data-type="video" data-url="' . esc_url($video['guid']) . '" data-caption="' . esc_attr($caption) . '">';
+                        echo '<video controls>';
+                        echo '<source src="' . esc_url($video['guid']) . '" type="video/mp4">';
+                        echo 'Your browser does not support the video tag.';
+                        echo '</video>';
+                        echo '</div>';
+                    }
+                }
+            }
+        }
+        ?>
+    </div>
+
+    <!-- Modal for displaying larger images and videos with caption -->
+    <div id="galleryModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <div class="modal-media"></div>
+            <div class="modal-caption"></div>
+        </div>
+    </div>
+
+    <script src="<?php echo get_template_directory_uri(); ?>/js/gallery.js"></script>
+<?php endif; ?>
+<!-- End of Gallery section -->
+
 
             <?php if (is_page('staff')) : ?>
                 <?php
