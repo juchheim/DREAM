@@ -66,7 +66,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
-html {
+ html {
 	line-height: 1.15;
 	-webkit-text-size-adjust: 100%;
 }
@@ -1158,14 +1158,22 @@ body, html {
 }
 
 /* Shrinked header styles */
+
 .site-header.shrink {
-    padding: 0;
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
-    background-color: #fff; /* Add background to prevent content behind the header from being visible */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Styles for the placeholder div */
+.header-placeholder {
+    display: none;
+    height: 180px; /* Adjust this value to match the height of the shrunken header */
+}
+
+.header-placeholder.show {
+    display: block;
 }
 
 .site-header .site-branding img {
@@ -1467,6 +1475,12 @@ body, html {
     margin-bottom: 5px; /* Space between title and caption */
 }
 
+@media (max-width: 1000px) {
+    .media-slider .caption {
+        display: none;
+    }
+}
+
 
 
 /* Two-column layout */
@@ -1494,7 +1508,7 @@ body, html {
 }
 
 .entry-content h3 {
-    color: #febd00;
+    color: #e1ab08;
     font-family: "Titillium Web", sans-serif;
 	font-weight: 500;
 	font-style: normal;

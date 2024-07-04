@@ -48,6 +48,8 @@
     </div>
 </header>
 
+<div class="header-placeholder"></div> <!-- This div will compensate for the header shrink -->
+
 <div id="content" class="site-content">
 
 <script>
@@ -70,23 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('scroll', function() {
         const header = document.querySelector('.site-header');
-        let primaryDiv;
-        <?php if (is_front_page()) : ?>
-            primaryDiv = document.querySelector('.media-slider'); // for the front page
-        <?php else: ?>
-            primaryDiv = document.querySelector('.content-area'); // for other pages, to adjust for spacing re: shrinking header
-        <?php endif; ?>
+        const placeholder = document.querySelector('.header-placeholder');
 
-        if (primaryDiv) {
-            if (window.scrollY > 0) {
-                header.classList.add('shrink');
-                primaryDiv.classList.add('header-fixed');
-            } else {
-                header.classList.remove('shrink');
-                primaryDiv.classList.remove('header-fixed');
-            }
+        if (window.scrollY > 0) {
+            header.classList.add('shrink');
+            placeholder.classList.add('show');
         } else {
-            console.log('primaryDiv is not defined.');
+            header.classList.remove('shrink');
+            placeholder.classList.remove('show');
         }
     });
 });
@@ -107,5 +100,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     observer.observe(form);
 });
-
 </script>
