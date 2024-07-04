@@ -1190,7 +1190,7 @@ body, html {
 }
 
 .site-header.shrink .main-menu ul {
-    top: 80px;
+    top: 100px;
 }
 
 /* Add space above the media-slider when header shrinks */
