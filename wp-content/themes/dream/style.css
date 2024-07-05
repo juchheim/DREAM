@@ -2021,6 +2021,7 @@ p {
         margin:0;
         padding:0;
     }
+
 }
 
 
@@ -2088,7 +2089,7 @@ p {
 }
 
 .gallery-item {
-    width: calc(33.333% - 1rem);
+    width: calc(20% - 1rem);
     cursor: pointer;
     position: relative;
 }
