@@ -1602,7 +1602,7 @@ footer {
 }
 
 .parallax-background {
-    background-image: url('/wp-content/uploads/2024/07/dream_room.jpg');
+    background-image: url('/wp-content/uploads/2024/07/parallax.jpg');
     height: 100%;
     width: 100%;
     background-attachment: fixed;
@@ -2227,6 +2227,8 @@ p {
     text-align: center;
     color: white;
 }
+
+
 
 .wpcf7 {
     width:80%;
