@@ -319,3 +319,80 @@ add_filter('auto_update_plugin', '__return_true');
 add_filter('auto_update_theme', '__return_true');
 
 
+
+
+// Add a custom column to the Gallery post type
+function add_gallery_thumbnail_column($columns) {
+    // Create an array to store the new columns
+    $new_columns = array();
+    
+    // Loop through existing columns and insert the thumbnail column before the title column
+    foreach ($columns as $key => $value) {
+        if ($key == 'title') {
+            $new_columns['gallery_thumbnail'] = __('Thumbnail');
+        }
+        $new_columns[$key] = $value;
+    }
+
+    return $new_columns;
+}
+add_filter('manage_gallery_posts_columns', 'add_gallery_thumbnail_column');
+
+// Populate the custom column with thumbnails
+function display_gallery_thumbnail_column($column, $post_id) {
+    if ($column === 'gallery_thumbnail') {
+        // The first image is stored in a custom field called 'image'
+        $images = get_post_meta($post_id, 'image', true);
+        
+        if (!empty($images)) {
+            // If the field contains multiple image IDs, extract the first one
+            $first_image_id = is_array($images) ? $images[0] : $images;
+            $thumbnail = wp_get_attachment_image_src($first_image_id, 'thumbnail');
+            
+            if ($thumbnail) {
+                echo '<img src="' . esc_url($thumbnail[0]) . '" alt="" style="max-width: 100px; height: auto;">';
+            } else {
+                echo 'No thumbnail found';
+            }
+        } else {
+            
+        }
+    }
+}
+add_action('manage_gallery_posts_custom_column', 'display_gallery_thumbnail_column', 10, 2);
+
+// adjust the admin spacing, hiding unneeded elements
+function custom_gallery_admin_css() {
+    $screen = get_current_screen();
+    if ($screen->post_type === 'gallery' && $screen->base === 'edit') {
+        echo '<style>
+            .column-gallery_thumbnail {
+                width: 100px; /* Adjust width as needed */
+            }
+            .column-title {
+                padding-left: 10px; /* Adjust padding as needed */
+                display: flex;
+                align-items: center;
+            }
+            .column-title a.row-title {
+                flex-grow: 1;
+            }
+            .column-title .row-actions {
+                display: inline-flex;
+                margin-left: 30px;
+            }
+            .column-title .row-actions span {
+                display: inline-block;
+                margin-left: 5px; /* Adjust spacing between actions */
+            }
+            .spo-move-under-sibling {
+                display:none !important;
+            }
+            .view {
+                display:none !important;
+            }
+        </style>';
+    }
+}
+add_action('admin_head', 'custom_gallery_admin_css');
+
