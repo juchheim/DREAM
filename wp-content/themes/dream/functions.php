@@ -318,3 +318,4 @@ add_filter('auto_update_plugin', '__return_true');
 // Enable auto-updates for themes
 add_filter('auto_update_theme', '__return_true');
 
+

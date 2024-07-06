@@ -12,6 +12,7 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<!-- <div class="divider-upsidedown"></div> -->
 <header class="site-header">
     <div class="container">
         <div class="site-branding">
@@ -49,6 +50,8 @@
 </header>
 
 <div class="header-placeholder"></div> <!-- This div will compensate for the header shrink -->
+
+<!-- <div class="divider"></div> -->
 
 <div id="content" class="site-content">
 

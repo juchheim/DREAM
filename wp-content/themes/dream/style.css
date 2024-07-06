@@ -2313,4 +2313,21 @@ input[type="submit"]:hover {
     opacity: 0;
     animation: fadeInUp 1s ease-in-out forwards;
   }
+
+  .divider-upsidedown {
+    width: 100%;
+    height:45px;
+    background-image: url('/wp-content/uploads/2024/07/divider_upsidedown.jpg');
+    background-size: cover; /* Ensure the image covers the entire div */
+    background-position: center; /* Center the image */
+    background-repeat: repeat-x; /* Prevent the image from repeating */
+  }
   
+  .divider {
+    width: 100%;
+    height:45px;
+    background-image: url('/wp-content/uploads/2024/07/divider.jpg'); /* Specify the path to your background image */
+    background-size: cover; /* Ensure the image covers the entire div */
+    background-position: center; /* Center the image */
+    background-repeat: repeat-x; /* Prevent the image from repeating */
+  }
