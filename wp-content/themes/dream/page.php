@@ -228,58 +228,56 @@ get_header(); ?>
             ?>
 
 
-            <!-- Virtual Tour -->
-            <?php if (is_page('virtual-tour')) : ?>
-                <div class="tabs">
-                    <ul class="tab-list">
-                        <?php
-                        // Fetch panorama images from Pods
-                        $virtual_tour_pod = pods('virtual_tour');
-                        $params = array(
-                            'limit' => -1 // Fetch all records
-                        );
-                        $virtual_tour_pod->find($params);
-                        $panorama_images = [];
-                        $index = 0;
+<!-- Virtual Tour -->
+<?php if (is_page('virtual-tour')) : ?>
+    <div class="tabs-container">
+        <ul class="tab-list">
+            <?php
+            // Fetch panorama images from Pods
+            $virtual_tour_pod = pods('virtual_tour');
+            $params = array(
+                'limit' => -1 // Fetch all records
+            );
+            $virtual_tour_pod->find($params);
+            $panorama_images = [];
+            $index = 0;
 
-                        while ($virtual_tour_pod->fetch()) {
-                            $title = $virtual_tour_pod->field('title');
-                            $panorama_image = $virtual_tour_pod->field('panorama_image');
-                            $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
-                            if ($panorama_image && isset($panorama_image['guid'])) {
-                                $panorama_images[] = array('title' => $title, 'url' => $panorama_image['guid'], 'main_paragraph_text' => $main_paragraph_text);
-                            }
-                        }
+            while ($virtual_tour_pod->fetch()) {
+                $title = $virtual_tour_pod->field('title');
+                $panorama_image = $virtual_tour_pod->field('panorama_image');
+                $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
+                if ($panorama_image && isset($panorama_image['guid'])) {
+                    $panorama_images[] = array('title' => $title, 'url' => $panorama_image['guid'], 'main_paragraph_text' => $main_paragraph_text);
+                    echo '<li class="tab" data-tab="tab-' . $index . '">' . esc_html($title) . '</li>';
+                    $index++;
+                }
+            }
+            ?>
+        </ul>
+        <div class="tab-content">
+            <?php
+            foreach ($panorama_images as $index => $image) {
+                $active_class = $index === 0 ? 'active' : '';
+                echo '<div id="tab-' . $index . '" class="tab-pane ' . $active_class . '">';
+                echo '<div class="panorama-container">';
+                echo '<div id="panorama-' . $index . '" class="vr-container" data-panorama="' . esc_url($image['url']) . '"></div>';
+                echo '<div class="panorama-content">';
+                echo '<p>' . wp_kses_post($image['main_paragraph_text']) . '</p>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+            }
+            ?>
+        </div>
+    </div>
+<?php endif; ?>
+<!-- End of Virtual Tour section -->
 
-                        if (!empty($panorama_images)) {
-                            foreach ($panorama_images as $index => $image) {
-                                $active_class = $index === 0 ? 'active' : '';
-                                echo '<li class="tab ' . $active_class . '" data-tab="tab-' . $index . '">' . esc_html($image['title']) . '</li>';
-                            }
-                        } else {
-                            echo '<script>console.log("No panorama images found.");</script>';
-                        }
-                        ?>
-                    </ul>
-                    <div class="tab-content">
-                        <?php
-                        if (!empty($panorama_images)) {
-                            foreach ($panorama_images as $index => $image) {
-                                $active_class = $index === 0 ? 'active' : '';
-                                echo '<div id="tab-' . $index . '" class="tab-pane ' . $active_class . '">';
-                                echo '<div id="panorama-' . $index . '" class="vr-container" data-panorama="' . esc_url($image['url']) . '"></div>';
-                                echo '<div class="panorama-content">';
-                                // Output the main paragraph text of the Pod item
-                                echo '<p>' . wp_kses_post($image['main_paragraph_text']) . '</p>';
-                                echo '</div>';
-                                echo '</div>';
-                            }
-                        }
-                        ?>
-                    </div>
-                </div>
-            <?php endif; ?>
-            <!-- End of Virtual Tour section -->
+
+
+
+
+
 
 
 
