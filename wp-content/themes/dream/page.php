@@ -284,6 +284,7 @@ get_header(); ?>
 
 
 
+
             <!-- Gallery section added here -->
             <?php if (is_page('gallery')) : ?>
                 <div class="gallery">

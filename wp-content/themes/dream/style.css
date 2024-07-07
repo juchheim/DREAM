@@ -2371,9 +2371,13 @@ input[type="submit"]:hover {
 
 
 /* Tabs styles for virtual tour */
+
+/* General Styles */
 .tabs {
     display: flex;
     flex-direction: column;
+    max-width: 1000px; /* Increased width */
+    margin: 0 auto;
 }
 
 .tab-list {
@@ -2381,34 +2385,67 @@ input[type="submit"]:hover {
     list-style: none;
     padding: 0;
     margin: 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ddd;
+    justify-content: flex-start; /* Align tabs to the start */
 }
 
 .tab {
-    padding: 10px 20px;
+    padding: 12px 24px;
     cursor: pointer;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-bottom: none;
-    background-color: #f1f1f1;
-    margin-right: 5px;
-    transition: background-color 0.3s ease;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+    border-radius: 5px 5px 0 0;
+    box-sizing: border-box;
+    flex-shrink: 0; /* Prevent shrinking */
+    flex-basis: 20%; /* Ensure equal width for all tabs */
+    max-width: 200px; /* Optional: Limit max width for tabs */
+}
+
+.tab:hover {
+    background-color: #e9e9e9;
 }
 
 .tab.active {
-    background-color: #ccc;
+    background-color: #fff;
+    color: #333;
+    border-bottom: 2px solid #0073e6;
+    z-index: 1;
+}
+
+.tab-content {
+    width: 100%; /* Ensure full width for tab content */
 }
 
 .tab-content .tab-pane {
     display: none;
+    width: 100%; /* Ensure full width for tab pane */
 }
 
 .tab-content .tab-pane.active {
     display: block;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #0058b2;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: #fff;
+    border-radius: 0 0 5px 5px;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive layout */
 @media (max-width: 768px) {
     .tab-list {
         flex-direction: column;
@@ -2419,8 +2456,33 @@ input[type="submit"]:hover {
         margin-bottom: 5px;
         width: 100%;
         box-sizing: border-box;
+        border-radius: 5px;
     }
     .tab + .tab {
         border-top: none;
     }
+}
+
+/* Panorama container styles */
+.vr-container {
+    width: 100%;
+    height: 500px; /* Increased height */
+    background: #000;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.panorama-content {
+    margin-top: 15px;
+}
+
+.panorama-content p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Debugging Styles */
+.tab-list, .tab-content, .tab-pane {
+    outline: 1px solid red; /* Add an outline to help debug the layout */
 }
