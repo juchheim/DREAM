@@ -196,6 +196,20 @@ get_header(); ?>
                 <div class="tall-box"><img src="/wp-content/uploads/2024/07/kid_with_network_cable.png" class="slide-in" /></div>
             
                 <!-- insert new images here -->
+                 <!--
+                <div class="flex-container">
+                    <div class="stacked-image">
+                        <img src="/wp-content/uploads/2024/07/four_with_artwork.jpg" />
+                    </div>
+                    <div class="stacked-image">
+                        <img src="/wp-content/uploads/2024/07/four_with_artwork.jpg" />
+                    </div>
+                    <div class="stacked-image">
+                        <img src="/wp-content/uploads/2024/07/four_with_artwork.jpg" />
+                    </div>
+                </div>
+            -->
+
             
             </div>
         <?php else : ?>

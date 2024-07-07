@@ -1705,7 +1705,7 @@ p {
 
 .child-page-right-column {
 	padding:0;
-	margin:-30px 0 -26px 0;
+	margin:-10px 0 -26px 0;
 }
 
 .entry-content h2 {
@@ -2094,6 +2094,25 @@ p {
     position: relative;
 }
 
+@media (max-width: 1024px) {
+    .gallery-item {
+        width: calc(25% - 1rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-item {
+        width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 500px) {
+    .gallery-item {
+        width: calc(100% - 1rem);
+    }
+}
+
+
 .gallery-item img, .gallery-item video {
     width: 100%;
     height: auto;
@@ -2333,3 +2352,19 @@ input[type="submit"]:hover {
   }
 
 
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    margin-top:500px;
+}
+
+.stacked-image {
+    width: 100%;
+    margin-bottom: 10px; /* Adjust the spacing as needed */
+}
+
+.stacked-image img {
+    width: 70%;
+    height: auto;
+    margin-left:100px;
+}
