@@ -230,53 +230,64 @@ get_header(); ?>
 
 <!-- Virtual Tour -->
 <?php if (is_page('virtual-tour')) : ?>
-    <div class="panoramas">
-        <?php
-        // Fetch panorama images from Pods
-        $virtual_tour_pod = pods('virtual_tour');
-        $params = array(
-            'limit' => -1 // Fetch all records
-        );
-        $virtual_tour_pod->find($params);
+    <div class="tabs-container">
+        <ul class="tab-list">
+            <?php
+            // Fetch panorama images from Pods
+            $virtual_tour_pod = pods('virtual_tour');
+            $params = array(
+                'limit' => -1 // Fetch all records
+            );
+            $virtual_tour_pod->find($params);
+            $panorama_images = [];
+            $index = 0;
 
-        while ($virtual_tour_pod->fetch()) {
-            $title = $virtual_tour_pod->field('title');
-            $panorama_image = $virtual_tour_pod->field('panorama_image');
-            $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
-            $description = $virtual_tour_pod->field('description'); // Get the description
-
-            // Debugging: Print data types and values
-            echo '<pre>';
-            echo 'Title: ' . var_export($title, true) . PHP_EOL;
-            echo 'Panorama Image: ' . var_export($panorama_image, true) . PHP_EOL;
-            echo 'Main Paragraph Text: ' . var_export($main_paragraph_text, true) . PHP_EOL;
-            echo 'Description: ' . var_export($description, true) . PHP_EOL;
-            echo '</pre>';
-
-            if ($panorama_image && isset($panorama_image['guid'])) {
+            while ($virtual_tour_pod->fetch()) {
+                $title = $virtual_tour_pod->field('title');
+                $panorama_image = $virtual_tour_pod->field('panorama_image');
+                $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
+                $description = $virtual_tour_pod->field('description'); // Get the description
+                if ($panorama_image && isset($panorama_image['guid'])) {
+                    $panorama_images[] = array(
+                        'title' => $title, 
+                        'url' => $panorama_image['guid'], 
+                        'main_paragraph_text' => $main_paragraph_text, 
+                        'description' => $description
+                    );
+                    $active_class = $index === 0 ? 'active' : '';
+                    echo '<li class="tab ' . $active_class . '" data-tab="tab-' . $index . '">' . esc_html($title) . '</li>';
+                    $index++;
+                }
+            }
+            ?>
+        </ul>
+        <div class="tab-content">
+            <?php
+            foreach ($panorama_images as $index => $image) {
+                $active_class = $index === 0 ? 'active' : '';
+                echo '<div id="tab-' . $index . '" class="tab-pane ' . $active_class . '">';
                 echo '<div class="panorama">';
-                echo '<h3>' . esc_html($title) . '</h3>';
-                echo '<div class="vr-container" data-panorama="' . esc_url($panorama_image['guid']) . '"></div>';
-                if (!empty($main_paragraph_text) || !empty($description)) {
+                echo '<h3 class="panorama-title">' . esc_html($image['title']) . '</h3>';
+                echo '<div class="vr-container" data-panorama="' . esc_url($image['url']) . '"></div>';
+                if (!empty($image['main_paragraph_text']) || !empty($image['description'])) {
                     echo '<div class="panorama-content">';
-                    if (!empty($main_paragraph_text)) {
-                        echo '<p>' . $main_paragraph_text . '</p>';
+                    if (!empty($image['main_paragraph_text'])) {
+                        echo '<p>' . $image['main_paragraph_text'] . '</p>';
                     }
-                    if (!empty($description) && is_array($description)) {
-                        foreach ($description as $desc_item) {
+                    if (!empty($image['description']) && is_array($image['description'])) {
+                        foreach ($image['description'] as $desc_item) {
                             echo '<p class="description">' . $desc_item . '</p>';
                         }
-                    } elseif (!empty($description)) {
-                        echo '<p class="description">' . $description . '</p>';
+                    } elseif (!empty($image['description'])) {
+                        echo '<p class="description">' . $image['description'] . '</p>';
                     }
                     echo '</div>';
                 }
                 echo '</div>';
-            } else {
-                echo '<script>console.error("Panorama image URL not found for ' . esc_html($title) . '");</script>';
+                echo '</div>';
             }
-        }
-        ?>
+            ?>
+        </div>
     </div>
 <?php endif; ?>
 <!-- End of Virtual Tour section -->
