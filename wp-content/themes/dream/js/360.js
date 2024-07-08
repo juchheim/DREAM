@@ -1,10 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     var vrContainers = document.querySelectorAll('.vr-container');
-    var panoramaSections = document.querySelectorAll('.panorama-section');
 
-    function initializePanorama(container) {
-        var panoramaImage = container.getAttribute('data-panorama');
-        if (container && panoramaImage) {
+    function initializePanorama(container, panoramaImage) {
+        if (container && typeof pannellum !== 'undefined') {
             pannellum.viewer(container, {
                 type: 'equirectangular',
                 panorama: panoramaImage,
@@ -26,4 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    vrContainers.forEach(function (container) {
+        var panoramaImage = container.getAttribute('data-panorama');
+        initializePanorama(container, panoramaImage);
+    });
 });
