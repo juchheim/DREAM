@@ -2304,7 +2304,7 @@ p {
 }
 
 /* Responsive layout */
-@media (max-width: 1024px) {
+@media (max-width: 1113px) {
     .tab-list {
         display: none; /* Hide tabs on mobile */
     }
