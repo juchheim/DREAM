@@ -234,7 +234,9 @@ get_header(); ?>
         <?php
         // Fetch panorama images from Pods
         $virtual_tour_pod = pods('virtual_tour');
-        $params = array('limit' => -1); // Fetch all records
+        $params = array(
+            'limit' => -1 // Fetch all records
+        );
         $virtual_tour_pod->find($params);
 
         while ($virtual_tour_pod->fetch()) {
@@ -242,7 +244,6 @@ get_header(); ?>
             $panorama_image = $virtual_tour_pod->field('panorama_image');
             $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
             $description = $virtual_tour_pod->field('description'); // Get the description
-
             if ($panorama_image && isset($panorama_image['guid'])) {
                 echo '<div class="panorama-section">';
                 echo '<h3 class="panorama-title">' . esc_html($title) . '</h3>';
@@ -265,9 +266,39 @@ get_header(); ?>
 <?php endif; ?>
 <!-- End of Virtual Tour section -->
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var vrContainers = document.querySelectorAll('.vr-container');
 
+    function initializePanorama(container, panoramaImage) {
+        if (container && typeof pannellum !== 'undefined') {
+            pannellum.viewer(container, {
+                type: 'equirectangular',
+                panorama: panoramaImage,
+                autoLoad: true,
+                autoRotate: -2,
+                pitch: 0,
+                yaw: 0,
+                hfov: 120,
+                minHfov: 50,
+                maxHfov: 120,
+                minPitch: -90,
+                maxPitch: 90,
+                minYaw: -180,
+                maxYaw: 180,
+                showControls: true,
+                northOffset: 0,
+                backgroundColor: [0, 0, 0],
+            });
+        }
+    }
 
-
+    vrContainers.forEach(function (container) {
+        var panoramaImage = container.getAttribute('data-panorama');
+        initializePanorama(container, panoramaImage);
+    });
+});
+</script>
 
 
 
