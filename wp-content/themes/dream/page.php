@@ -266,19 +266,10 @@ get_header(); ?>
             foreach ($panorama_images as $index => $image) {
                 $active_class = $index === 0 ? 'active' : '';
                 echo '<div id="tab-' . $index . '" class="tab-pane ' . $active_class . '">';
-                echo '<div class="panorama-container">';
-                echo '<div class="vr-container" data-panorama="' . esc_url($image['url']) . '"></div>';
-                if (!empty($image['main_paragraph_text']) || !empty($image['description'])) {
-                    echo '<div class="panorama-content">';
-                    if (!empty($image['main_paragraph_text'])) {
-                        echo '<p>' . wp_kses_post($image['main_paragraph_text']) . '</p>';
-                    }
-                    if (!empty($image['description'])) {
-                        echo '<p class="description">' . wp_kses_post($image['description']) . '</p>'; // Output the description
-                    }
-                    echo '</div>';
-                }
-                echo '</div>';
+                echo '<h3>' . esc_html($image['title']) . '</h3>';
+                echo '<p>URL: ' . esc_url($image['url']) . '</p>';
+                echo '<p>Main Paragraph: ' . wp_kses_post($image['main_paragraph_text']) . '</p>';
+                echo '<p>Description: ' . wp_kses_post($image['description']) . '</p>';
                 echo '</div>';
             }
             ?>
@@ -306,7 +297,6 @@ document.addEventListener('DOMContentLoaded', function () {
     tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
 });
 </script>
-
 
 
             <!-- Gallery section added here -->
