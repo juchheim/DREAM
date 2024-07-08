@@ -26,17 +26,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function handleScroll() {
-        panoramaSections.forEach(function (section) {
-            var rect = section.getBoundingClientRect();
-            if (rect.top < window.innerHeight && !section.classList.contains('visible')) {
-                section.classList.add('visible');
-                var vrContainer = section.querySelector('.vr-container');
-                initializePanorama(vrContainer);
-            }
-        });
-    }
-
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('load', handleScroll);
 });
