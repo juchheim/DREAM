@@ -242,19 +242,10 @@ get_header(); ?>
         while ($virtual_tour_pod->fetch()) {
             $title = $virtual_tour_pod->field('title');
             $panorama_image = $virtual_tour_pod->field('panorama_image');
-            $description = $virtual_tour_pod->field('description'); // Get the description
-
             if ($panorama_image && isset($panorama_image['guid'])) {
                 echo '<div class="panorama">';
                 echo '<h3>' . esc_html($title) . '</h3>';
                 echo '<div class="vr-container" data-panorama="' . esc_url($panorama_image['guid']) . '"></div>';
-                if (!empty($description)) {
-                    echo '<div class="panorama-content">';
-                    if (!empty($description)) {
-                        echo '<p class="description">' . wp_kses_post($description) . '</p>';
-                    }
-                    echo '</div>';
-                }
                 echo '</div>';
             } else {
                 echo '<script>console.error("Panorama image URL not found for ' . esc_html($title) . '");</script>';
@@ -264,7 +255,6 @@ get_header(); ?>
     </div>
 <?php endif; ?>
 <!-- End of Virtual Tour section -->
-
 
 
 
