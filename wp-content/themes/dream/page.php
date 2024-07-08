@@ -228,38 +228,64 @@ get_header(); ?>
             ?>
 
 
-<div class="tabs-container">
-    <ul class="tab-list">
-        <li class="tab active" data-tab="tab-0">Tab 1</li>
-        <li class="tab" data-tab="tab-1">Tab 2</li>
-    </ul>
-    <div class="tab-content active" id="tab-0">
-        Content 1
+<!-- Virtual Tour -->
+<?php if (is_page('virtual-tour')) : ?>
+    <div class="tabs-container">
+        <ul class="tab-list">
+            <?php
+            // Fetch panorama images from Pods
+            $virtual_tour_pod = pods('virtual_tour');
+            $params = array(
+                'limit' => -1 // Fetch all records
+            );
+            $virtual_tour_pod->find($params);
+            $panorama_images = [];
+            $index = 0;
+
+            while ($virtual_tour_pod->fetch()) {
+                $title = $virtual_tour_pod->field('title');
+                $panorama_image = $virtual_tour_pod->field('panorama_image');
+                $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
+                $description = $virtual_tour_pod->field('description'); // Get the description
+                if ($panorama_image && isset($panorama_image['guid'])) {
+                    $panorama_images[] = array(
+                        'title' => $title, 
+                        'url' => $panorama_image['guid'], 
+                        'main_paragraph_text' => $main_paragraph_text, 
+                        'description' => $description
+                    );
+                    $active_class = $index === 0 ? 'active' : '';
+                    echo '<li class="tab ' . $active_class . '" data-tab="tab-' . $index . '">' . esc_html($title) . '</li>';
+                    $index++;
+                }
+            }
+            ?>
+        </ul>
+        <div class="tab-content">
+            <?php
+            foreach ($panorama_images as $index => $image) {
+                $active_class = $index === 0 ? 'active' : '';
+                echo '<div id="tab-' . $index . '" class="tab-pane ' . $active_class . '">';
+                echo '<div class="panorama-container">';
+                echo '<div class="vr-container" data-panorama="' . esc_url($image['url']) . '"></div>';
+                if (!empty($image['main_paragraph_text']) || !empty($image['description'])) {
+                    echo '<div class="panorama-content">';
+                    if (!empty($image['main_paragraph_text'])) {
+                        echo '<p>' . wp_kses_post($image['main_paragraph_text']) . '</p>';
+                    }
+                    if (!empty($image['description'])) {
+                        echo '<p class="description">' . wp_kses_post($image['description']) . '</p>'; // Output the description
+                    }
+                    echo '</div>';
+                }
+                echo '</div>';
+                echo '</div>';
+            }
+            ?>
+        </div>
     </div>
-    <div class="tab-content" id="tab-1">
-        Content 2
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    var tabs = document.querySelectorAll('.tab');
-    var panes = document.querySelectorAll('.tab-content');
-
-    function handleTabClick(event) {
-        var targetTab = event.target;
-        var targetPaneId = targetTab.getAttribute('data-tab');
-
-        tabs.forEach(tab => tab.classList.remove('active'));
-        panes.forEach(pane => pane.classList.remove('active'));
-
-        targetTab.classList.add('active');
-        document.getElementById(targetPaneId).classList.add('active');
-    }
-
-    tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
-});
-</script>
+<?php endif; ?>
+<!-- End of Virtual Tour section -->
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -280,28 +306,6 @@ document.addEventListener('DOMContentLoaded', function () {
     tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
 });
 </script>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    var tabs = document.querySelectorAll('.tab');
-    var panes = document.querySelectorAll('.tab-pane');
-
-    function handleTabClick(event) {
-        var targetTab = event.target;
-        var targetPaneId = targetTab.getAttribute('data-tab');
-
-        tabs.forEach(tab => tab.classList.remove('active'));
-        panes.forEach(pane => pane.classList.remove('active'));
-
-        targetTab.classList.add('active');
-        document.getElementById(targetPaneId).classList.add('active');
-    }
-
-    tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
-});
-</script>
-
 
 
 
