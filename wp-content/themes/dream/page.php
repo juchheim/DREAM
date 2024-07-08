@@ -252,10 +252,10 @@ get_header(); ?>
                 if (!empty($main_paragraph_text) || !empty($description)) {
                     echo '<div class="panorama-content">';
                     if (!empty($main_paragraph_text)) {
-                        echo '<p>' . wp_kses_post($main_paragraph_text) . '</p>';
+                        echo '<p>' . $main_paragraph_text . '</p>';
                     }
                     if (!empty($description)) {
-                        echo '<p class="description">' . esc_html($description) . '</p>';
+                        echo '<p class="description">' . $description . '</p>';
                     }
                     echo '</div>';
                 }
@@ -268,6 +268,7 @@ get_header(); ?>
     </div>
 <?php endif; ?>
 <!-- End of Virtual Tour section -->
+
 
 
 
