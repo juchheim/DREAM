@@ -2272,7 +2272,7 @@ p {
 }
 
 .vr-container {
-    width: 100%;
+    width: 90%;
     height: 600px; /* Adjust height as needed */
     background: #000;
     border-radius: 5px;
@@ -2301,20 +2301,26 @@ p {
 /* Responsive layout */
 @media (max-width: 768px) {
     .tab-list {
-        flex-direction: column;
-        border-bottom: none;
+        display: none; /* Hide tabs on mobile */
     }
-    .tab {
-        margin-right: 0;
-        margin-bottom: 5px;
-        width: 100%;
+    .dropdown-container {
+        display: block; /* Show dropdown on mobile */
+        text-align: center;
+        margin: 20px 0;
+    }
+    .dropdown-menu {
+        width: 90%;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #0058b2; /* Background color */
+        color: white; /* Text color */
+        border: none; /* Remove border */
+        border-radius: 5px; /* Rounded corners */
         box-sizing: border-box;
-        border-radius: 5px;
-    }
-    .tab + .tab {
-        border-top: none;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Drop shadow */
     }
 }
+
 
 
 
