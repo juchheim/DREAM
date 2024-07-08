@@ -2221,12 +2221,13 @@ p {
 }
 
 .vr-container {
-    width: 100%;
-    height: 600px;
+    width: 90%;
+    height: 500px;
     background: #000;
     border-radius: 5px;
     overflow: hidden;
     margin-bottom: 20px;
+    margin: 0 auto;
 }
 
 .panorama-content {
@@ -2252,6 +2253,7 @@ p {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .vr-container {
+        width: 100%;
         height: 400px;
     }
 }
