@@ -262,7 +262,11 @@ get_header(); ?>
                     if (!empty($main_paragraph_text)) {
                         echo '<p>' . $main_paragraph_text . '</p>';
                     }
-                    if (!empty($description)) {
+                    if (!empty($description) && is_array($description)) {
+                        foreach ($description as $desc_item) {
+                            echo '<p class="description">' . $desc_item . '</p>';
+                        }
+                    } elseif (!empty($description)) {
                         echo '<p class="description">' . $description . '</p>';
                     }
                     echo '</div>';
@@ -276,6 +280,7 @@ get_header(); ?>
     </div>
 <?php endif; ?>
 <!-- End of Virtual Tour section -->
+
 
 
 
