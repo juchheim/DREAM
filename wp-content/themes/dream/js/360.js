@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var tabs = document.querySelectorAll('.tab');
-    var panes = document.querySelectorAll('.tab-pane');
+    var vrContainers = document.querySelectorAll('.vr-container');
+    var panoramaSections = document.querySelectorAll('.panorama-section');
 
-    function initializePanorama(container, panoramaImage) {
-        if (container && typeof pannellum !== 'undefined') {
+    function initializePanorama(container) {
+        var panoramaImage = container.getAttribute('data-panorama');
+        if (container && panoramaImage) {
             pannellum.viewer(container, {
                 type: 'equirectangular',
                 panorama: panoramaImage,
@@ -25,33 +26,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function handleTabClick(event) {
-        var targetTab = event.target;
-        var targetPaneId = targetTab.getAttribute('data-tab');
-
-        tabs.forEach(tab => tab.classList.remove('active'));
-        panes.forEach(pane => pane.classList.remove('active'));
-
-        targetTab.classList.add('active');
-        document.getElementById(targetPaneId).classList.add('active');
-
-        var activePane = document.getElementById(targetPaneId);
-        var vrContainer = activePane.querySelector('.vr-container');
-        var panoramaImage = vrContainer.getAttribute('data-panorama');
-
-        if (!vrContainer.getAttribute('data-initialized')) {
-            initializePanorama(vrContainer, panoramaImage);
-            vrContainer.setAttribute('data-initialized', 'true');
-        }
+    function handleScroll() {
+        panoramaSections.forEach(function (section) {
+            var rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight && !section.classList.contains('visible')) {
+                section.classList.add('visible');
+                var vrContainer = section.querySelector('.vr-container');
+                initializePanorama(vrContainer);
+            }
+        });
     }
 
-    tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
-
-    // Initialize the first panorama by default
-    var firstPane = document.querySelector('.tab-pane.active .vr-container');
-    if (firstPane) {
-        var firstImage = firstPane.getAttribute('data-panorama');
-        initializePanorama(firstPane, firstImage);
-        firstPane.setAttribute('data-initialized', 'true');
-    }
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('load', handleScroll);
 });
