@@ -248,7 +248,7 @@ get_header(); ?>
                 echo '<h3>' . esc_html($title) . '</h3>';
                 echo '<div class="vr-container" data-panorama="' . esc_url($panorama_image['guid']) . '"></div>';
                 echo '</div>';
-                echo '<div class="description">' . wp_kses_post($description) . '</div>';
+                echo '<div class="description">' . $description . '</div>';
             } else {
                 echo '<script>console.error("Panorama image URL not found for ' . esc_html($title) . '");</script>';
             }
