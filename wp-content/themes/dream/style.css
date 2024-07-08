@@ -2203,49 +2203,119 @@ p {
 
 /* virtual tour */
 
-#master-container {
-	max-width:100% !important; 
-	width: 100% !important; 
-	height: 600px !important;
+/* Tabs container styles */
+.tabs-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+/* Tab list styles */
+.tab-list {
+    display: flex;
+    flex-wrap: wrap; /* Allow tabs to wrap to the next line */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+.tab {
+    padding: 12px 24px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+    flex-grow: 1; /* Ensure tabs are flexible */
+    flex-basis: 0; /* Ensure tabs are flexible and can wrap */
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.tab:hover {
+    background-color: #e9e9e9;
+}
+
+.tab.active {
+    background-color: #fff;
+    color: #333;
+    border-bottom: 2px solid #0073e6;
+    z-index: 1;
+}
+
+/* Tab content styles */
+.tab-content {
+    width: 100%; /* Ensure full width for tab content */
+}
+
+.tab-content .tab-pane {
+    display: none;
+    width: 100%; /* Ensure full width for tab pane */
+}
+
+.tab-content .tab-pane.active {
+    display: block;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: #fff;
+    border-radius: 0 0 5px 5px;
+}
+
+/* Panorama container styles */
+.panorama-container {
+    text-align: center;
+    width: 100%; /* Ensure full width */
 }
 
 .vr-container {
-	width: 90%;
-	height: 500px;
-	margin: 0 auto; /* Center the container horizontally */
-	display: block;
-  }
-  
-.panoramas {
-    background-color: #0058b2;
-    border-radius: 8px;
-    box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 600px; /* Adjust height as needed */
+    background: #000;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 15px;
 }
 
-.panorama-section {
-    margin-bottom: 50px;
-}
-
-.panorama-title {
-    text-align: center;
-    font-size: 32px;
-    margin-top: 30px;
-    color: white;
-    text-transform: uppercase;
-}
-
-.panorama-description {
-    text-align: center;
+.panorama-content p {
     font-size: 16px;
-    margin-top: 10px;
+    color: #666;
+    line-height: 1.5;
 }
 
-.panorama-content {
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-    color: white;
+/* Responsive layout */
+@media (max-width: 768px) {
+    .tab-list {
+        display: none; /* Hide tab list on mobile and tablets */
+    }
+    .dropdown-container {
+        display: block; /* Show dropdown on mobile and tablets */
+    }
 }
+
+/* Default styles for dropdown */
+.dropdown-container {
+    display: none; /* Hide dropdown on desktop */
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.dropdown-menu {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+
 
 
 
@@ -2370,148 +2440,4 @@ input[type="submit"]:hover {
 }
 
 
-/* virtual tour */
-/* Tabs container styles */
-.tabs-container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
-}
 
-.tab-list {
-    display: flex;
-    flex-wrap: nowrap; /* Ensure tabs do not wrap on desktop */
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border-bottom: 1px solid #ddd;
-    width: 100%;
-    overflow-x: auto; /* Allow horizontal scrolling if necessary */
-}
-
-.tab {
-    padding: 12px 24px;
-    cursor: pointer;
-    border: 1px solid #ddd;
-    border-bottom: none;
-    background-color: #f9f9f9;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    text-align: center;
-    font-weight: bold;
-    color: #555;
-    flex-grow: 1;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.tab:hover {
-    background-color: #e9e9e9;
-}
-
-.tab.active {
-    background-color: #fff;
-    color: #333;
-    border-bottom: 2px solid #0073e6;
-    z-index: 1;
-}
-
-.tab-content {
-    width: 100%; /* Ensure full width for tab content */
-}
-
-.tab-content .tab-pane {
-    display: none;
-    width: 100%; /* Ensure full width for tab pane */
-}
-
-.tab-content .tab-pane.active {
-    display: block;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-top: none;
-    background-color: #fff;
-    border-radius: 0 0 5px 5px;
-}
-
-.panorama-container {
-    text-align: center;
-    width: 100%; /* Ensure full width */
-}
-
-.vr-container {
-    width: 100%;
-    height: 600px; /* Adjust height as needed */
-    background: #000;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-bottom: 15px;
-}
-
-.panorama-content p {
-    font-size: 16px;
-    color: #666;
-    line-height: 1.5;
-}
-
-/* Responsive layout */
-@media (max-width: 768px) {
-    .tab-list {
-        flex-direction: column;
-    }
-    .tab {
-        width: 100%;
-        margin-bottom: 5px;
-    }
-}
-
-
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/* Responsive layout */
-@media (max-width: 768px) {
-    .tabs {
-        max-width: 100%; /* controls the width of the whole virtual tour */
-    }
-    .tab-list {
-        flex-direction: column;
-        border-bottom: none;
-        width: 100%;
-    }
-    .tab {
-        margin-right: 0;
-        margin-bottom: 5px;
-        width: 100%; /* Make tabs full width */
-        box-sizing: border-box;
-        border-radius: 5px;
-    }
-    .tab + .tab {
-        border-top: none;
-    }
-}
-
-/* Panorama container styles */
-.vr-container {
-    width: 100%;
-    height: 500px; /* Increased height */
-    background: #000;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.panorama-content {
-    margin-top: 15px;
-}
-
-.panorama-content p {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.5;
-}

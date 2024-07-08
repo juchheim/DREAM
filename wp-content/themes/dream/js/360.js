@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     var tabs = document.querySelectorAll('.tab');
     var panes = document.querySelectorAll('.tab-pane');
+    var dropdownMenu = document.getElementById('dropdown-menu');
 
     function initializePanorama(container, panoramaImage) {
         if (container && typeof pannellum !== 'undefined') {
@@ -45,7 +46,27 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function handleDropdownChange(event) {
+        var targetPaneId = event.target.value;
+
+        tabs.forEach(tab => tab.classList.remove('active'));
+        panes.forEach(pane => pane.classList.remove('active'));
+
+        document.querySelector(`.tab[data-tab="${targetPaneId}"]`).classList.add('active');
+        document.getElementById(targetPaneId).classList.add('active');
+
+        var activePane = document.getElementById(targetPaneId);
+        var vrContainer = activePane.querySelector('.vr-container');
+        var panoramaImage = vrContainer.getAttribute('data-panorama');
+
+        if (!vrContainer.getAttribute('data-initialized')) {
+            initializePanorama(vrContainer, panoramaImage);
+            vrContainer.setAttribute('data-initialized', 'true');
+        }
+    }
+
     tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
+    dropdownMenu.addEventListener('change', handleDropdownChange);
 
     // Initialize the first panorama by default
     var firstPane = document.querySelector('.tab-pane.active .vr-container');

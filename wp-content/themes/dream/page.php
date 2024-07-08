@@ -231,26 +231,37 @@ get_header(); ?>
 <!-- Virtual Tour -->
 <?php if (is_page('virtual-tour')) : ?>
     <div class="tabs-container">
+        <div class="dropdown-container">
+            <select id="dropdown-menu" class="dropdown-menu">
+                <?php
+                // Fetch panorama images from Pods
+                $virtual_tour_pod = pods('virtual_tour');
+                $params = array(
+                    'limit' => -1 // Fetch all records
+                );
+                $virtual_tour_pod->find($params);
+                $panorama_images = [];
+                $index = 0;
+
+                while ($virtual_tour_pod->fetch()) {
+                    $title = $virtual_tour_pod->field('title');
+                    $panorama_image = $virtual_tour_pod->field('panorama_image');
+                    $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
+                    if ($panorama_image && isset($panorama_image['guid'])) {
+                        $panorama_images[] = array('title' => $title, 'url' => $panorama_image['guid'], 'main_paragraph_text' => $main_paragraph_text);
+                        $selected = $index === 0 ? 'selected' : '';
+                        echo '<option value="tab-' . $index . '" ' . $selected . '>' . esc_html($title) . '</option>';
+                        $index++;
+                    }
+                }
+                ?>
+            </select>
+        </div>
         <ul class="tab-list">
             <?php
-            // Fetch panorama images from Pods
-            $virtual_tour_pod = pods('virtual_tour');
-            $params = array(
-                'limit' => -1 // Fetch all records
-            );
-            $virtual_tour_pod->find($params);
-            $panorama_images = [];
-            $index = 0;
-
-            while ($virtual_tour_pod->fetch()) {
-                $title = $virtual_tour_pod->field('title');
-                $panorama_image = $virtual_tour_pod->field('panorama_image');
-                $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
-                if ($panorama_image && isset($panorama_image['guid'])) {
-                    $panorama_images[] = array('title' => $title, 'url' => $panorama_image['guid'], 'main_paragraph_text' => $main_paragraph_text);
-                    echo '<li class="tab" data-tab="tab-' . $index . '">' . esc_html($title) . '</li>';
-                    $index++;
-                }
+            foreach ($panorama_images as $index => $image) {
+                $active_class = $index === 0 ? 'active' : '';
+                echo '<li class="tab ' . $active_class . '" data-tab="tab-' . $index . '">' . esc_html($image['title']) . '</li>';
             }
             ?>
         </ul>
@@ -272,15 +283,6 @@ get_header(); ?>
     </div>
 <?php endif; ?>
 <!-- End of Virtual Tour section -->
-
-
-
-
-
-
-
-
-
 
 
             <!-- Gallery section added here -->
