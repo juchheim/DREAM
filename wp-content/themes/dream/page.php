@@ -247,8 +247,14 @@ get_header(); ?>
                     $title = $virtual_tour_pod->field('title');
                     $panorama_image = $virtual_tour_pod->field('panorama_image');
                     $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
+                    $description = $virtual_tour_pod->field('description'); // Get the description
                     if ($panorama_image && isset($panorama_image['guid'])) {
-                        $panorama_images[] = array('title' => $title, 'url' => $panorama_image['guid'], 'main_paragraph_text' => $main_paragraph_text);
+                        $panorama_images[] = array(
+                            'title' => $title, 
+                            'url' => $panorama_image['guid'], 
+                            'main_paragraph_text' => $main_paragraph_text, 
+                            'description' => $description
+                        );
                         $selected = $index === 0 ? 'selected' : '';
                         echo '<option value="tab-' . $index . '" ' . $selected . '>' . esc_html($title) . '</option>';
                         $index++;
@@ -274,6 +280,7 @@ get_header(); ?>
                 echo '<div id="panorama-' . $index . '" class="vr-container" data-panorama="' . esc_url($image['url']) . '"></div>';
                 echo '<div class="panorama-content">';
                 echo '<p>' . wp_kses_post($image['main_paragraph_text']) . '</p>';
+                echo '<p class="description">' . wp_kses_post($image['description']) . '</p>'; // Output the description
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
@@ -283,6 +290,7 @@ get_header(); ?>
     </div>
 <?php endif; ?>
 <!-- End of Virtual Tour section -->
+
 
 
 
