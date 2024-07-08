@@ -242,10 +242,22 @@ get_header(); ?>
         while ($virtual_tour_pod->fetch()) {
             $title = $virtual_tour_pod->field('title');
             $panorama_image = $virtual_tour_pod->field('panorama_image');
+            $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
+            $description = $virtual_tour_pod->field('description'); // Get the description
             if ($panorama_image && isset($panorama_image['guid'])) {
-                echo '<div class="panorama-section">';
+                echo '<div class="panorama-section fade-in">';
                 echo '<h3 class="panorama-title">' . esc_html($title) . '</h3>';
                 echo '<div class="vr-container" data-panorama="' . esc_url($panorama_image['guid']) . '"></div>';
+                if (!empty($main_paragraph_text) || !empty($description)) {
+                    echo '<div class="panorama-content">';
+                    if (!empty($main_paragraph_text)) {
+                        echo '<p>' . wp_kses_post($main_paragraph_text) . '</p>';
+                    }
+                    if (!empty($description)) {
+                        echo '<p class="description">' . wp_kses_post($description) . '</p>';
+                    }
+                    echo '</div>';
+                }
                 echo '</div>';
             }
         }
@@ -281,12 +293,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    vrContainers.forEach(function (container) {
-        var panoramaImage = container.getAttribute('data-panorama');
-        initializePanorama(container, panoramaImage);
-    });
+    var fadeIns = document.querySelectorAll('.fade-in');
+
+    function handleScroll() {
+        fadeIns.forEach(function (section) {
+            var rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight && !section.classList.contains('visible')) {
+                section.classList.add('visible');
+                var vrContainer = section.querySelector('.vr-container');
+                var panoramaImage = vrContainer.getAttribute('data-panorama');
+                initializePanorama(vrContainer, panoramaImage);
+            }
+        });
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('load', handleScroll);
 });
 </script>
+
 
 
 
