@@ -245,6 +245,14 @@ get_header(); ?>
             $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
             $description = $virtual_tour_pod->field('description'); // Get the description
 
+            // Debugging: Print data types and values
+            echo '<pre>';
+            echo 'Title: ' . var_export($title, true) . PHP_EOL;
+            echo 'Panorama Image: ' . var_export($panorama_image, true) . PHP_EOL;
+            echo 'Main Paragraph Text: ' . var_export($main_paragraph_text, true) . PHP_EOL;
+            echo 'Description: ' . var_export($description, true) . PHP_EOL;
+            echo '</pre>';
+
             if ($panorama_image && isset($panorama_image['guid'])) {
                 echo '<div class="panorama">';
                 echo '<h3>' . esc_html($title) . '</h3>';
@@ -268,6 +276,7 @@ get_header(); ?>
     </div>
 <?php endif; ?>
 <!-- End of Virtual Tour section -->
+
 
 
 
