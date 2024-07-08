@@ -2298,6 +2298,8 @@ p {
     margin-top: 10px;
 }
 
+.dropdown-menu { display: none; }
+
 /* Responsive layout */
 @media (max-width: 768px) {
     .tab-list {
@@ -2309,6 +2311,7 @@ p {
         margin: 20px 0;
     }
     .dropdown-menu {
+        display: block;
         width: 90%;
         padding: 10px;
         font-size: 16px;
