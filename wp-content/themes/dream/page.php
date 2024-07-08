@@ -230,32 +230,72 @@ get_header(); ?>
 
 <!-- Virtual Tour -->
 <?php if (is_page('virtual-tour')) : ?>
-    <div class="panoramas">
-        <?php
-        // Fetch panorama images from Pods
-        $virtual_tour_pod = pods('virtual_tour');
-        $params = array(
-            'limit' => -1 // Fetch all records
-        );
-        $virtual_tour_pod->find($params);
+    <div class="tabs-container">
+        <div class="dropdown-container">
+            <select id="dropdown-menu" class="dropdown-menu">
+                <?php
+                // Fetch panorama images from Pods
+                $virtual_tour_pod = pods('virtual_tour');
+                $params = array(
+                    'limit' => -1 // Fetch all records
+                );
+                $virtual_tour_pod->find($params);
+                $panorama_images = [];
+                $index = 0;
 
-        while ($virtual_tour_pod->fetch()) {
-            $title = $virtual_tour_pod->field('title');
-            $panorama_image = $virtual_tour_pod->field('panorama_image');
-            if ($panorama_image && isset($panorama_image['guid'])) {
-                echo '<div class="panorama">';
-                echo '<h3>' . esc_html($title) . '</h3>';
-                echo '<div class="vr-container" data-panorama="' . esc_url($panorama_image['guid']) . '"></div>';
-                echo '</div>';
-            } else {
-                echo '<script>console.error("Panorama image URL not found for ' . esc_html($title) . '");</script>';
+                while ($virtual_tour_pod->fetch()) {
+                    $title = $virtual_tour_pod->field('title');
+                    $panorama_image = $virtual_tour_pod->field('panorama_image');
+                    $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
+                    $description = $virtual_tour_pod->field('description'); // Get the description
+                    if ($panorama_image && isset($panorama_image['guid'])) {
+                        $panorama_images[] = array(
+                            'title' => $title, 
+                            'url' => $panorama_image['guid'], 
+                            'main_paragraph_text' => $main_paragraph_text, 
+                            'description' => $description
+                        );
+                        $selected = $index === 0 ? 'selected' : '';
+                        echo '<option value="tab-' . $index . '" ' . $selected . '>' . esc_html($title) . '</option>';
+                        $index++;
+                    }
+                }
+                ?>
+            </select>
+        </div>
+        <ul class="tab-list">
+            <?php
+            foreach ($panorama_images as $index => $image) {
+                $active_class = $index === 0 ? 'active' : '';
+                echo '<li class="tab ' . $active_class . '" data-tab="tab-' . $index . '">' . esc_html($image['title']) . '</li>';
             }
-        }
-        ?>
+            ?>
+        </ul>
+        <div class="tab-content">
+            <?php
+            foreach ($panorama_images as $index => $image) {
+                $active_class = $index === 0 ? 'active' : '';
+                echo '<div id="tab-' . $index . '" class="tab-pane ' . $active_class . '">';
+                echo '<div class="panorama-container">';
+                echo '<div id="panorama-' . $index . '" class="vr-container" data-panorama="' . esc_url($image['url']) . '"></div>';
+                if (!empty($image['main_paragraph_text']) || !empty($image['description'])) {
+                    echo '<div class="panorama-content">';
+                    if (!empty($image['main_paragraph_text'])) {
+                        echo '<p>' . wp_kses_post($image['main_paragraph_text']) . '</p>';
+                    }
+                    if (!empty($image['description'])) {
+                        echo '<p class="description">' . wp_kses_post($image['description']) . '</p>'; // Output the description
+                    }
+                    echo '</div>';
+                }
+                echo '</div>';
+                echo '</div>';
+            }
+            ?>
+        </div>
     </div>
 <?php endif; ?>
 <!-- End of Virtual Tour section -->
-
 
 
 

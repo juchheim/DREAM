@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var vrContainers = document.querySelectorAll('.vr-container');
-    vrContainers.forEach(function (container) {
-        var panoramaImage = container.getAttribute('data-panorama');
-        if (panoramaImage) {
+    var tabs = document.querySelectorAll('.tab');
+    var panes = document.querySelectorAll('.tab-pane');
+    var dropdownMenu = document.getElementById('dropdown-menu');
+
+    function initializePanorama(container, panoramaImage) {
+        if (container && typeof pannellum !== 'undefined') {
             pannellum.viewer(container, {
                 type: 'equirectangular',
                 panorama: panoramaImage,
@@ -21,8 +23,56 @@ document.addEventListener('DOMContentLoaded', function () {
                 northOffset: 0,
                 backgroundColor: [0, 0, 0],
             });
-        } else {
-            console.error('No panorama image URL provided.');
         }
-    });
+    }
+
+    function handleTabClick(event) {
+        var targetTab = event.target;
+        var targetPaneId = targetTab.getAttribute('data-tab');
+
+        tabs.forEach(tab => tab.classList.remove('active'));
+        panes.forEach(pane => pane.classList.remove('active'));
+
+        targetTab.classList.add('active');
+        document.getElementById(targetPaneId).classList.add('active');
+
+        var activePane = document.getElementById(targetPaneId);
+        var vrContainer = activePane.querySelector('.vr-container');
+        var panoramaImage = vrContainer.getAttribute('data-panorama');
+
+        if (!vrContainer.getAttribute('data-initialized')) {
+            initializePanorama(vrContainer, panoramaImage);
+            vrContainer.setAttribute('data-initialized', 'true');
+        }
+    }
+
+    function handleDropdownChange(event) {
+        var targetPaneId = event.target.value;
+
+        tabs.forEach(tab => tab.classList.remove('active'));
+        panes.forEach(pane => pane.classList.remove('active'));
+
+        document.querySelector(`.tab[data-tab="${targetPaneId}"]`).classList.add('active');
+        document.getElementById(targetPaneId).classList.add('active');
+
+        var activePane = document.getElementById(targetPaneId);
+        var vrContainer = activePane.querySelector('.vr-container');
+        var panoramaImage = vrContainer.getAttribute('data-panorama');
+
+        if (!vrContainer.getAttribute('data-initialized')) {
+            initializePanorama(vrContainer, panoramaImage);
+            vrContainer.setAttribute('data-initialized', 'true');
+        }
+    }
+
+    tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
+    dropdownMenu.addEventListener('change', handleDropdownChange);
+
+    // Initialize the first panorama by default
+    var firstPane = document.querySelector('.tab-pane.active .vr-container');
+    if (firstPane) {
+        var firstImage = firstPane.getAttribute('data-panorama');
+        initializePanorama(firstPane, firstImage);
+        firstPane.setAttribute('data-initialized', 'true');
+    }
 });
