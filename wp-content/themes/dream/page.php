@@ -308,6 +308,27 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var tabs = document.querySelectorAll('.tab');
+    var panes = document.querySelectorAll('.tab-pane');
+
+    function handleTabClick(event) {
+        var targetTab = event.target;
+        var targetPaneId = targetTab.getAttribute('data-tab');
+
+        tabs.forEach(tab => tab.classList.remove('active'));
+        panes.forEach(pane => pane.classList.remove('active'));
+
+        targetTab.classList.add('active');
+        document.getElementById(targetPaneId).classList.add('active');
+    }
+
+    tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
+});
+</script>
+
+
 
 
             <!-- Gallery section added here -->
