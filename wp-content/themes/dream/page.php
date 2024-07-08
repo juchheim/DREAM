@@ -285,6 +285,7 @@ get_header(); ?>
 <!-- End of Virtual Tour section -->
 
 
+
             <!-- Gallery section added here -->
             <?php if (is_page('gallery')) : ?>
                 <div class="gallery">

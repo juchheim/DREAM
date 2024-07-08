@@ -2291,16 +2291,6 @@ p {
     line-height: 1.5;
 }
 
-/* Responsive layout */
-@media (max-width: 768px) {
-    .tab-list {
-        display: none; /* Hide tab list on mobile and tablets */
-    }
-    .dropdown-container {
-        display: block; /* Show dropdown on mobile and tablets */
-    }
-}
-
 /* Default styles for dropdown */
 .dropdown-container {
     display: none; /* Hide dropdown on desktop */
@@ -2315,7 +2305,15 @@ p {
     font-size: 16px;
 }
 
-
+/* Responsive layout */
+@media (max-width: 1092px) {
+    .tab-list {
+        display: none; /* Hide tab list on mobile and tablets */
+    }
+    .dropdown-container {
+        display: block; /* Show dropdown on mobile and tablets */
+    }
+}
 
 
 
