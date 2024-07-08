@@ -234,9 +234,7 @@ get_header(); ?>
         <?php
         // Fetch panorama images from Pods
         $virtual_tour_pod = pods('virtual_tour');
-        $params = array(
-            'limit' => -1 // Fetch all records
-        );
+        $params = array('limit' => -1); // Fetch all records
         $virtual_tour_pod->find($params);
 
         while ($virtual_tour_pod->fetch()) {
@@ -244,6 +242,7 @@ get_header(); ?>
             $panorama_image = $virtual_tour_pod->field('panorama_image');
             $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
             $description = $virtual_tour_pod->field('description'); // Get the description
+
             if ($panorama_image && isset($panorama_image['guid'])) {
                 echo '<div class="panorama-section">';
                 echo '<h3 class="panorama-title">' . esc_html($title) . '</h3>';
