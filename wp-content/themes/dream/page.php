@@ -309,6 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
             <!-- Gallery section added here -->
             <?php if (is_page('gallery')) : ?>
                 <div class="gallery">
