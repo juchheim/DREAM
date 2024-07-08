@@ -2201,74 +2201,61 @@ p {
 	display: none;
 }
 
-/* virtual tour */
-
-/* Tabs container styles */
-.tabs-container {
+/* General styles for the virtual tour */
+.panorama-container {
     width: 100%;
     margin: 0 auto;
-    padding: 0;
-    overflow-x: hidden; /* Prevent horizontal overflow */
-}
-
-/* Tab list styles */
-.tab-list {
-    display: flex;
-    flex-wrap: wrap; /* Allow tabs to wrap to the next line */
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border-bottom: 1px solid #ddd;
-    width: 100%;
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
-}
-
-.tab {
-    padding: 12px 24px;
-    cursor: pointer;
-    border: 1px solid #ddd;
-    border-bottom: none;
-    background-color: #f9f9f9;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    text-align: center;
-    font-weight: bold;
-    color: #555;
-    flex-grow: 1; /* Ensure tabs are flexible */
-    flex-basis: 0; /* Ensure tabs are flexible and can wrap */
+    padding: 20px 0;
     box-sizing: border-box;
+}
+
+.panorama-section {
+    margin-bottom: 40px;
     text-align: center;
-    white-space: nowrap; /* Prevent text wrapping */
 }
 
-.tab:hover {
-    background-color: #e9e9e9;
-}
-
-.tab.active {
-    background-color: #fff;
+.panorama-title {
+    font-size: 24px;
     color: #333;
-    border-bottom: 2px solid #0073e6;
-    z-index: 1;
+    margin-bottom: 10px;
 }
 
-/* Tab content styles */
-.tab-content {
-    width: 100%; /* Ensure full width for tab content */
+.vr-container {
+    width: 100%;
+    height: 600px;
+    background: #000;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
 
-.tab-content .tab-pane {
-    display: none;
-    width: 100%; /* Ensure full width for tab pane */
+.panorama-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
 }
 
-.tab-content .tab-pane.active {
-    display: block;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-top: none;
-    background-color: #fff;
-    border-radius: 0 0 5px 5px;
+.panorama-content p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin: 10px 0;
 }
+
+.panorama-content p.description {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+    margin-top: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .vr-container {
+        height: 400px;
+    }
+}
+
 
 
 

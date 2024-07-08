@@ -230,73 +230,76 @@ get_header(); ?>
 
 <!-- Virtual Tour -->
 <?php if (is_page('virtual-tour')) : ?>
-    <div class="tabs-container">
-        <ul class="tab-list">
-            <?php
-            // Fetch panorama images from Pods
-            $virtual_tour_pod = pods('virtual_tour');
-            $params = array(
-                'limit' => -1 // Fetch all records
-            );
-            $virtual_tour_pod->find($params);
-            $panorama_images = [];
-            $index = 0;
+    <div class="panorama-container">
+        <?php
+        // Fetch panorama images from Pods
+        $virtual_tour_pod = pods('virtual_tour');
+        $params = array(
+            'limit' => -1 // Fetch all records
+        );
+        $virtual_tour_pod->find($params);
 
-            while ($virtual_tour_pod->fetch()) {
-                $title = $virtual_tour_pod->field('title');
-                $panorama_image = $virtual_tour_pod->field('panorama_image');
-                $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
-                $description = $virtual_tour_pod->field('description'); // Get the description
-                if ($panorama_image && isset($panorama_image['guid'])) {
-                    $panorama_images[] = array(
-                        'title' => $title, 
-                        'url' => $panorama_image['guid'], 
-                        'main_paragraph_text' => $main_paragraph_text, 
-                        'description' => $description
-                    );
-                    $active_class = $index === 0 ? 'active' : '';
-                    echo '<li class="tab ' . $active_class . '" data-tab="tab-' . $index . '">' . esc_html($title) . '</li>';
-                    $index++;
+        while ($virtual_tour_pod->fetch()) {
+            $title = $virtual_tour_pod->field('title');
+            $panorama_image = $virtual_tour_pod->field('panorama_image');
+            $main_paragraph_text = $virtual_tour_pod->field('post_content'); // Get the main content
+            $description = $virtual_tour_pod->field('description'); // Get the description
+            if ($panorama_image && isset($panorama_image['guid'])) {
+                echo '<div class="panorama-section">';
+                echo '<h3 class="panorama-title">' . esc_html($title) . '</h3>';
+                echo '<div class="vr-container" data-panorama="' . esc_url($panorama_image['guid']) . '"></div>';
+                if (!empty($main_paragraph_text) || !empty($description)) {
+                    echo '<div class="panorama-content">';
+                    if (!empty($main_paragraph_text)) {
+                        echo '<p>' . wp_kses_post($main_paragraph_text) . '</p>';
+                    }
+                    if (!empty($description)) {
+                        echo '<p class="description">' . wp_kses_post($description) . '</p>';
+                    }
+                    echo '</div>';
                 }
-            }
-            ?>
-        </ul>
-        <div class="tab-content">
-            <?php
-            foreach ($panorama_images as $index => $image) {
-                $active_class = $index === 0 ? 'active' : '';
-                echo '<div id="tab-' . $index . '" class="tab-pane ' . $active_class . '">';
-                echo '<h3>' . esc_html($image['title']) . '</h3>';
-                echo '<p>URL: ' . esc_url($image['url']) . '</p>';
-                echo '<p>Main Paragraph: ' . wp_kses_post($image['main_paragraph_text']) . '</p>';
-                echo '<p>Description: ' . wp_kses_post($image['description']) . '</p>';
                 echo '</div>';
             }
-            ?>
-        </div>
+        }
+        ?>
     </div>
 <?php endif; ?>
 <!-- End of Virtual Tour section -->
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var tabs = document.querySelectorAll('.tab');
-    var panes = document.querySelectorAll('.tab-pane');
+    var vrContainers = document.querySelectorAll('.vr-container');
 
-    function handleTabClick(event) {
-        var targetTab = event.target;
-        var targetPaneId = targetTab.getAttribute('data-tab');
-
-        tabs.forEach(tab => tab.classList.remove('active'));
-        panes.forEach(pane => pane.classList.remove('active'));
-
-        targetTab.classList.add('active');
-        document.getElementById(targetPaneId).classList.add('active');
+    function initializePanorama(container, panoramaImage) {
+        if (container && typeof pannellum !== 'undefined') {
+            pannellum.viewer(container, {
+                type: 'equirectangular',
+                panorama: panoramaImage,
+                autoLoad: true,
+                autoRotate: -2,
+                pitch: 0,
+                yaw: 0,
+                hfov: 120,
+                minHfov: 50,
+                maxHfov: 120,
+                minPitch: -90,
+                maxPitch: 90,
+                minYaw: -180,
+                maxYaw: 180,
+                showControls: true,
+                northOffset: 0,
+                backgroundColor: [0, 0, 0],
+            });
+        }
     }
 
-    tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
+    vrContainers.forEach(function (container) {
+        var panoramaImage = container.getAttribute('data-panorama');
+        initializePanorama(container, panoramaImage);
+    });
 });
 </script>
+
 
 
             <!-- Gallery section added here -->
