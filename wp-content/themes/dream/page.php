@@ -242,11 +242,13 @@ get_header(); ?>
         while ($virtual_tour_pod->fetch()) {
             $title = $virtual_tour_pod->field('title');
             $panorama_image = $virtual_tour_pod->field('panorama_image');
+            $description = $virtual_tour_pod->field('description');
             if ($panorama_image && isset($panorama_image['guid'])) {
                 echo '<div class="panorama">';
                 echo '<h3>' . esc_html($title) . '</h3>';
                 echo '<div class="vr-container" data-panorama="' . esc_url($panorama_image['guid']) . '"></div>';
                 echo '</div>';
+                echo '<div class="description">' . esc_html($description) . '</div>';
             } else {
                 echo '<script>console.error("Panorama image URL not found for ' . esc_html($title) . '");</script>';
             }
