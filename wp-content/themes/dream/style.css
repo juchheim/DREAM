@@ -2202,37 +2202,86 @@ p {
 }
 
 /* General styles for the virtual tour */
-.panoramas {
+.tabs-container {
     width: 100%;
     margin: 0 auto;
     padding: 20px 0;
     box-sizing: border-box;
 }
 
-.panorama {
-    margin-bottom: 40px;
-    text-align: center;
+.tab-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+    justify-content: flex-start; /* Align tabs to the start */
 }
 
-.panorama h3 {
-    font-size: 24px;
+.tab {
+    padding: 12px 24px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+    flex-grow: 1; /* Ensure tabs are flexible */
+    flex-basis: 0; /* Ensure tabs are flexible and can wrap */
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.tab:hover {
+    background-color: #e9e9e9;
+}
+
+.tab.active {
+    background-color: #fff;
     color: #333;
-    margin-bottom: 10px;
+    border-bottom: 2px solid #0073e6;
+    z-index: 1;
+}
+
+/* Tab content styles */
+.tab-content {
+    width: 100%; /* Ensure full width for tab content */
+}
+
+.tab-content .tab-pane {
+    display: none;
+    width: 100%; /* Ensure full width for tab pane */
+}
+
+.tab-content .tab-pane.active {
+    display: block;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: #fff;
+    border-radius: 0 0 5px 5px;
+}
+
+/* Panorama container styles */
+.panorama-container {
+    text-align: center;
+    width: 100%; /* Ensure full width */
 }
 
 .vr-container {
     width: 90%;
-    height: 500px;
+    height: 600px; /* Adjust height as needed */
     background: #000;
     border-radius: 5px;
     overflow: hidden;
-    margin: 0 auto 20px; /* Center horizontally and add bottom margin */
+    margin-bottom: 15px;
 }
 
 .panorama-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: left;
+    margin-top: 15px;
 }
 
 .panorama-content p {
@@ -2249,13 +2298,24 @@ p {
     margin-top: 10px;
 }
 
-/* Responsive adjustments */
+/* Responsive layout */
 @media (max-width: 768px) {
-    .vr-container {
+    .tab-list {
+        flex-direction: column;
+        border-bottom: none;
+    }
+    .tab {
+        margin-right: 0;
+        margin-bottom: 5px;
         width: 100%;
-        height: 400px;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+    .tab + .tab {
+        border-top: none;
     }
 }
+
 
 
 
