@@ -2229,26 +2229,6 @@ p {
     margin-bottom: 20px;
 }
 
-.panorama-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: left;
-}
-
-.panorama-content p {
-    font-size: 16px;
-    color: #666;
-    line-height: 1.6;
-    margin: 10px 0;
-}
-
-.panorama-content p.description {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.4;
-    margin-top: 10px;
-}
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .vr-container {
