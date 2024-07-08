@@ -267,7 +267,6 @@ get_header(); ?>
                 $active_class = $index === 0 ? 'active' : '';
                 echo '<div id="tab-' . $index . '" class="tab-pane ' . $active_class . '">';
                 echo '<div class="panorama">';
-                echo '<h3 class="panorama-title">' . esc_html($image['title']) . '</h3>';
                 echo '<div class="vr-container" data-panorama="' . esc_url($image['url']) . '"></div>';
                 if (!empty($image['main_paragraph_text']) || !empty($image['description'])) {
                     echo '<div class="panorama-content">';
