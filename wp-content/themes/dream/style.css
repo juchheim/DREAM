@@ -2304,44 +2304,6 @@ p {
     margin-top: 10px;
 }
 
-/* Default styles for dropdown */
-.dropdown-container {
-    display: none; /* Hide dropdown on desktop */
-    width: 100%;
-    text-align: center;
-    margin: 20px 0;
-}
-
-.dropdown-menu {
-    width: 70%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #0058b2; /* Background color */
-    color: white; /* Text color */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    box-sizing: border-box;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add drop shadow */
-    transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
-}
-
-.dropdown-menu:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
-}
-
-/* Responsive layout */
-@media (max-width: 1092px) {
-    .tab-list {
-        display: none; /* Hide tab list on mobile and tablets */
-    }
-    .dropdown-container {
-        display: block; /* Show dropdown on mobile and tablets */
-    }
-    .dropdown-menu {
-        width: 90%;
-    }
-}
-
 
 .wpcf7 {
     width:80%;
