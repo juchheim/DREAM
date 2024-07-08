@@ -2300,7 +2300,7 @@ p {
 }
 
 .dropdown-menu {
-    width:70%;
+    width: 70%;
     padding: 10px;
     font-size: 16px;
     background-color: #0058b2; /* Background color */
@@ -2308,6 +2308,12 @@ p {
     border: none; /* Remove border */
     border-radius: 5px; /* Rounded corners */
     box-sizing: border-box;
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.5); /* Add drop shadow */
+    transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
+}
+
+.dropdown-menu:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
 }
 
 /* Responsive layout */
@@ -2322,7 +2328,6 @@ p {
         width: 90%;
     }
 }
-
 
 
 .wpcf7 {
