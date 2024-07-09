@@ -2166,6 +2166,28 @@ p {
     line-height: 1;
 }
 
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination a,
+.pagination span {
+    font-size: 20px;
+    margin: 0 5px;
+    padding: 10px 15px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.pagination a:hover {
+    background-color: #0058b2; 
+    color: #fff;
+}
+
+
+
+
 /* carats for nav menu parent items */
 .main-menu > li.menu-item-has-children > a {
 	position: relative;
