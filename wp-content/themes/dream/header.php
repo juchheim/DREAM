@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Dream Innovations Inc. is transforming rural communities through innovation and technology. Learn more about our mission, vision, and programs.">
+    <meta name="keywords" content="Dream Innovations Inc., rural communities, technology training, digital literacy, Yazoo City, Mississippi Delta, low-income students, education, workforce development, innovation center">
+    <meta name="author" content="Dream Innovations Inc.">
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">

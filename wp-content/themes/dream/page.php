@@ -193,19 +193,19 @@ get_header(); ?>
             </div>
             <!-- Right column with an image -->
             <div class="right-column">
-                <div class="tall-box"><img src="/wp-content/uploads/2024/07/kid_with_network_cable.png" class="slide-in" /></div>
+                <div class="tall-box"><img src="/wp-content/uploads/2024/07/kid_with_network_cable.png" class="slide-in" alt="Kid with Network Cable" /></div>
             
                 <!-- insert new images here -->
                  <!--
                 <div class="flex-container">
                     <div class="stacked-image">
-                        <img src="/wp-content/uploads/2024/07/four_with_artwork.jpg" />
+                        <img src="/wp-content/uploads/2024/07/four_with_artwork.jpg" alt="Artwork 1" />
                     </div>
                     <div class="stacked-image">
-                        <img src="/wp-content/uploads/2024/07/four_with_artwork.jpg" />
+                        <img src="/wp-content/uploads/2024/07/four_with_artwork.jpg" alt="Artwork 2" />
                     </div>
                     <div class="stacked-image">
-                        <img src="/wp-content/uploads/2024/07/four_with_artwork.jpg" />
+                        <img src="/wp-content/uploads/2024/07/four_with_artwork.jpg" alt="Artwork 3" />
                     </div>
                 </div>
             -->
