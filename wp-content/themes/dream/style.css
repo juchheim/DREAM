@@ -1470,9 +1470,12 @@ body, html {
 }
 
 .media-slider .caption .slide-title {
-    font-size: 1.5em; /* Significantly larger than the caption */
-    font-weight: bold;
+    font-size: 5em; /* Significantly larger than the caption */
+    line-height: 90px;
     margin-bottom: 5px; /* Space between title and caption */
+    font-family: "Titillium Web", sans-serif;
+	font-weight: 900;
+	font-style: normal;
 }
 
 @media (max-width: 1000px) {
@@ -2455,6 +2458,3 @@ input[type="submit"]:hover {
     height: auto;
     margin-left:100px;
 }
-
-
-
