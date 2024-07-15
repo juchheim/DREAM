@@ -1,11 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let currentIndex = 1; // Start from the first actual slide
+    const slidesContainer = document.querySelector('.media-slider .slides');
     const slides = document.querySelectorAll('.media-slider .slide');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    
+    if (!slidesContainer || slides.length === 0 || !prevButton || !nextButton) {
+        // Suppress error display
+        // console.error('Required slider elements are missing.');
+        return;
+    }
+
+    let currentIndex = 1; // Start from the first actual slide
     const totalSlides = slides.length;
     const slideWidth = slides[0].offsetWidth;
     let slideInterval;
 
-    const slidesContainer = document.querySelector('.media-slider .slides');
     slidesContainer.style.transform = 'translateX(' + (-slideWidth) + 'px)';
 
     function showSlide(index, transition = true) {
@@ -67,8 +76,8 @@ document.addEventListener('DOMContentLoaded', function() {
         resetTimer();
     }
 
-    document.querySelector('.prev').addEventListener('click', prevSlide);
-    document.querySelector('.next').addEventListener('click', nextSlide);
+    prevButton.addEventListener('click', prevSlide);
+    nextButton.addEventListener('click', nextSlide);
 
     showSlide(currentIndex, false); // Initially show the first actual slide without transition
     resetTimer(); // Initial delay for first slide

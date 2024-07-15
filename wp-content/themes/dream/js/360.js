@@ -65,8 +65,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
-    dropdown.addEventListener('change', handleDropdownChange);
+    if (tabs.length > 0) {
+        tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
+    }
+
+    if (dropdown) {
+        dropdown.addEventListener('change', handleDropdownChange);
+    }
 
     // Initialize the first panorama by default
     var firstPane = document.querySelector('.tab-pane.active .vr-container');

@@ -2185,7 +2185,13 @@ p {
     color: #fff;
 }
 
+.paginate {
+    background-color: #0058b2;
+}
 
+.paginate a {
+    color: white;
+}
 
 
 /* carats for nav menu parent items */

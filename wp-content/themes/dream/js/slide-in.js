@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const slideInElement = document.querySelector('.slide-in');
 
     if (!slideInElement) {
-        console.log('No .slide-in element found on this page.');
+        // Suppress error display
+        // console.log('No .slide-in element found on this page.');
         return; // Exit the function if the element is not found
     }
 

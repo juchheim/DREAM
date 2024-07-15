@@ -438,3 +438,105 @@ function custom_gallery_admin_css() {
 }
 add_action('admin_head', 'custom_gallery_admin_css');
 
+
+
+// gallery endpoint:
+
+function register_gallery_endpoint() {
+    register_rest_route('dream/v1', '/gallery/', array(
+        'methods' => 'GET',
+        'callback' => 'fetch_gallery_items',
+    ));
+}
+
+function fetch_gallery_items($request) {
+    $page = $request->get_param('page') ? $request->get_param('page') : 1;
+    $limit = 20;
+
+    $params = array(
+        'post_type' => 'gallery',
+        'posts_per_page' => $limit,
+        'paged' => $page,
+        'orderby' => 'menu_order', // Order by menu_order
+        'order' => 'ASC', // Ascending order
+    );
+
+    $query = new WP_Query($params);
+    $gallery_items = array();
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $pod = pods('gallery', get_the_ID());
+            if (!$pod) {
+                error_log('Error: Pods object not found for post ID ' . get_the_ID());
+                continue;
+            }
+            $images = $pod->field('image');
+            $videos = $pod->field('video');
+            $caption = $pod->field('caption');
+
+            error_log('Images: ' . print_r($images, true));
+            error_log('Videos: ' . print_r($videos, true));
+            error_log('Caption: ' . $caption);
+
+            $item_images = array();
+            if (!empty($images)) {
+                if (!is_array($images)) {
+                    $images = array($images);
+                }
+                foreach ($images as $image) {
+                    $image_id = is_array($image) ? $image['ID'] : $image;
+                    $medium_image = wp_get_attachment_image_src($image_id, 'medium');
+                    $full_image = wp_get_attachment_image_src($image_id, 'full');
+                    
+                    $item_images[] = array(
+                        'sizes' => array(
+                            'medium' => $medium_image ? $medium_image[0] : null,
+                            'full' => $full_image ? $full_image[0] : null,
+                        ),
+                        'caption' => $caption,
+                    );
+                }
+            }
+
+            $item_videos = array();
+            if (!empty($videos)) {
+                if (!is_array($videos)) {
+                    $videos = array($videos);
+                }
+                foreach ($videos as $video_url) {
+                    $item_videos[] = array(
+                        'guid' => $video_url,
+                        'caption' => $caption,
+                    );
+                }
+            }
+
+            $gallery_items[] = array(
+                'id' => get_the_ID(),
+                'images' => $item_images,
+                'videos' => $item_videos,
+                'caption' => $caption,
+            );
+        }
+    }
+
+    wp_reset_postdata();
+
+    $total_pages = $query->max_num_pages;
+
+    $response = array(
+        'items' => $gallery_items,
+        'total_pages' => $total_pages,
+    );
+
+    // Log the response for debugging
+    error_log('Response: ' . print_r($response, true));
+
+    return rest_ensure_response($response);
+}
+
+add_action('rest_api_init', 'register_gallery_endpoint');
+
+

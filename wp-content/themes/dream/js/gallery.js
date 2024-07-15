@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const galleryItems = document.querySelectorAll('.gallery-item');
     const modal = document.getElementById('galleryModal');
     const modalMedia = modal.querySelector('.modal-media');
     const modalCaption = modal.querySelector('.modal-caption');
     const closeModal = modal.querySelector('.close');
+    const galleryContainer = document.querySelector('.gallery');
+    const paginationContainer = document.querySelector('.pagination');
+    let currentPage = 1;
 
     function initializeGalleryItems(items) {
         items.forEach(item => {
@@ -46,7 +48,88 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    initializeGalleryItems(galleryItems);
+    function fetchGalleryItems(page) {
+        fetch(`http://dream.local/wp-json/dream/v1/gallery?page=${page}`)
+            .then(response => response.text())
+            .then(text => {
+                try {
+                    const data = JSON.parse(text);
+                    console.log('Fetched data:', data);
+
+                    if (!data || !Array.isArray(data.items)) {
+                        throw new Error('Invalid data structure');
+                    }
+
+                    galleryContainer.innerHTML = ''; // Clear existing items
+
+                    data.items.forEach(item => {
+                        if (Array.isArray(item.images) && item.images.length > 0) {
+                            item.images.forEach(image => {
+                                if (image.sizes.medium && image.sizes.full) {
+                                    const thumbnailUrl = image.sizes.medium;
+                                    const fullSizeUrl = image.sizes.full;
+                                    galleryContainer.innerHTML += `
+                                        <div class="gallery-item" data-type="image" data-url="${fullSizeUrl}" data-caption="${item.caption}">
+                                            <img src="${thumbnailUrl}" alt="Gallery Image">
+                                        </div>`;
+                                }
+                            });
+                        }
+                        if (Array.isArray(item.videos) && item.videos.length > 0) {
+                            item.videos.forEach(video => {
+                                galleryContainer.innerHTML += `
+                                    <div class="gallery-item" data-type="video" data-url="${video.guid}" data-caption="${item.caption}">
+                                        <video controls>
+                                            <source src="${video.guid}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>`;
+                            });
+                        }
+                    });
+
+                    initializeGalleryItems(document.querySelectorAll('.gallery-item'));
+                    renderPagination(data.total_pages, page);
+                } catch (error) {
+                    console.error('Error parsing JSON:', error, 'Response text:', text);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching the gallery items:', error);
+            });
+    }
+
+    function renderPagination(totalPages, currentPage) {
+        paginationContainer.innerHTML = ''; // Clear existing pagination
+
+        if (totalPages > 1) {
+            if (currentPage > 1) {
+                paginationContainer.innerHTML += `<div class="paginate"><a href="#" class="prev-page">Previous</a></div>`;
+            }
+            if (currentPage < totalPages) {
+                paginationContainer.innerHTML += `<div class="paginate"><a href="#" class="next-page">Next</a></div>`;
+            }
+
+            document.querySelector('.prev-page')?.addEventListener('click', function(event) {
+                event.preventDefault();
+                if (currentPage > 1) {
+                    currentPage--;
+                    fetchGalleryItems(currentPage);
+                }
+            });
+
+            document.querySelector('.next-page')?.addEventListener('click', function(event) {
+                event.preventDefault();
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    fetchGalleryItems(currentPage);
+                }
+            });
+        }
+    }
+
+    // Fetch the initial gallery items and pagination
+    fetchGalleryItems(currentPage);
 
     closeModal.addEventListener('click', function() {
         const modalVideo = modal.querySelector('.modal-video');
@@ -65,42 +148,4 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = 'none';
         }
     });
-
-    // Pagination handling
-    function initializePagination() {
-        const paginationLinks = document.querySelectorAll('.pagination a');
-
-        paginationLinks.forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                const url = this.href;
-
-                fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'text/html'
-                    }
-                })
-                .then(response => response.text())
-                .then(data => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(data, 'text/html');
-                    const newGalleryItems = doc.querySelector('.gallery').innerHTML;
-                    const newPagination = doc.querySelector('.pagination').innerHTML;
-
-                    document.querySelector('.gallery').innerHTML = newGalleryItems;
-                    document.querySelector('.pagination').innerHTML = newPagination;
-
-                    // Re-initialize gallery items and pagination links
-                    initializeGalleryItems(document.querySelectorAll('.gallery-item'));
-                    initializePagination();
-                })
-                .catch(error => {
-                    console.error('Error fetching the gallery items:', error);
-                });
-            });
-        });
-    }
-
-    initializePagination();
 });
