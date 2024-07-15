@@ -49,50 +49,67 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function fetchGalleryItems(page) {
-        fetch(`http://dream.local/wp-json/dream/v1/gallery?page=${page}`)
-            .then(response => response.text())
-            .then(text => {
-                try {
-                    const data = JSON.parse(text);
-                    console.log('Fetched data:', data);
+        const apiUrl = `https://wordpress-1260594-4612369.cloudwaysapps.com/wp-json/dream/v1/gallery?page=${page}`;
+        
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json(); // Use response.json() directly to parse JSON
+            })
+            .then(data => {
 
-                    if (!data || !Array.isArray(data.items)) {
-                        throw new Error('Invalid data structure');
-                    }
+                if (!data || !Array.isArray(data.items)) {
+                    throw new Error('Invalid data structure');
+                }
 
-                    galleryContainer.innerHTML = ''; // Clear existing items
+                galleryContainer.innerHTML = ''; // Clear existing items
 
-                    data.items.forEach(item => {
-                        if (Array.isArray(item.images) && item.images.length > 0) {
-                            item.images.forEach(image => {
-                                if (image.sizes.medium && image.sizes.full) {
-                                    const thumbnailUrl = image.sizes.medium;
-                                    const fullSizeUrl = image.sizes.full;
+                data.items.forEach(item => {
+
+                    if (Array.isArray(item.images) && item.images.length > 0) {
+                        item.images.forEach(image => {
+                            if (image.sizes && image.sizes.medium && image.sizes.full) {
+                                const thumbnailUrl = image.sizes.medium;
+                                const fullSizeUrl = image.sizes.full;
+                                if (typeof thumbnailUrl === 'string' && typeof fullSizeUrl === 'string') {
                                     galleryContainer.innerHTML += `
                                         <div class="gallery-item" data-type="image" data-url="${fullSizeUrl}" data-caption="${item.caption}">
                                             <img src="${thumbnailUrl}" alt="Gallery Image">
                                         </div>`;
+                                } else {
+                                    console.error('Invalid URL for image:', image);
                                 }
-                            });
-                        }
-                        if (Array.isArray(item.videos) && item.videos.length > 0) {
-                            item.videos.forEach(video => {
-                                galleryContainer.innerHTML += `
-                                    <div class="gallery-item" data-type="video" data-url="${video.guid}" data-caption="${item.caption}">
-                                        <video controls>
-                                            <source src="${video.guid}" type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </div>`;
-                            });
-                        }
-                    });
+                            } else {
+                                console.error('Image sizes not found:', image);
+                            }
+                        });
+                    }
+                    if (Array.isArray(item.videos) && item.videos.length > 0) {
+                        item.videos.forEach(video => {
+                            if (video.guid) {
+                                const videoUrl = video.guid.guid;
+                                if (typeof videoUrl === 'string') {
+                                    galleryContainer.innerHTML += `
+                                        <div class="gallery-item" data-type="video" data-url="${videoUrl}" data-caption="${item.caption}">
+                                            <video controls>
+                                                <source src="${videoUrl}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>`;
+                                } else {
+                                    console.error('Invalid URL for video:', video);
+                                }
+                            } else {
+                                console.error('Video GUID not found:', video);
+                            }
+                        });
+                    }
+                });
 
-                    initializeGalleryItems(document.querySelectorAll('.gallery-item'));
-                    renderPagination(data.total_pages, page);
-                } catch (error) {
-                    console.error('Error parsing JSON:', error, 'Response text:', text);
-                }
+                initializeGalleryItems(document.querySelectorAll('.gallery-item'));
+                renderPagination(data.total_pages, page);
             })
             .catch(error => {
                 console.error('Error fetching the gallery items:', error);

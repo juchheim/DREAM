@@ -2187,6 +2187,7 @@ p {
 
 .paginate {
     background-color: #0058b2;
+    border-radius: 5px;
 }
 
 .paginate a {
